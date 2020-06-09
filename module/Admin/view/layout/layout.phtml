@@ -1,3 +1,8 @@
+<?php
+if (defined('RUNNING_FROM_ROOT')) {
+    $this->plugin('basePath')->setBasePath($this->basePath().'/public');
+} ?>
+
 <?= $this->doctype() ?>
 <html lang="es">
 <head>
