@@ -1,0 +1,50 @@
+<?php 
+    $usuario = $this->usuario_helper($this->identity()['cod_usuario']);
+    $subirImagenForm = $this->subirImagenForm;
+    $subirImagenForm->setAttribute('action', $this->url('perfil', array('action' => 'subir-imagen')));
+    $subirImagenForm->prepare();
+?>
+
+<div class="uk-card uk-card-default uk-card-small uk-card-hover">
+	<div class="uk-card-header">
+		<h3>Perfil de usuario</h3>
+	</div>	
+	<div class="uk-card-body">
+		<div uk-grid>
+			<div class="uk-width-2-4@m uk-width-1-4@l">
+				<?php 
+					
+				?>				
+				<div id="profile" class="uk-inline-clip uk-transition-toggle">
+					<a href="javascript:void(0);">
+						<div class="uk-cover-container">
+							<canvas width="" height="350"></canvas>
+							<img src="<?php echo $this->basepath('img/perfil/');?><?php echo ($usuario->imagen_perfil == null) ? 'default.png' :  $usuario->imagen_perfil; ?>" class="profile-image img-rounded img-responsive" id="profileImg" uk-cover/>
+						</div>
+						<div class="uk-overlay uk-overlay-primary uk-transition-slide-bottom uk-position-bottom">
+                            <strong id="uploadTrigger" style="display: block;"><span uk-icon="icon: camera"></span> Cambiar</strong>
+                        	<?php echo $this->form()->openTag($subirImagenForm);?>
+                        	<div class="uk-form-custom uk-hidden">
+								<?php echo $this->formFile($subirImagenForm->get('imagen')); ?>
+								<button class="uk-button uk-button-default" type="button" tabindex="-1"></button>
+							</div>
+							<?php echo $this->form()->closeTag(); ?>
+                        </div>
+					</a>
+				</div>
+				<div style="top: 2px;"></div>
+				<div id="mensaje"></div>				
+			</div>
+			<div class="uk-width-2-4@m uk-width-3-4@l">
+				<h3><?php echo ucfirst(strtoupper($usuario->nombres)) . ' ' . strtoupper($usuario->apellidos) . ' ' . strtoupper($usuario->segundoApellido);?></h3>
+				<p><?php echo strtoupper($usuario->rol);?></p>
+				<p><?php echo $usuario->correo;?></p>
+				<hr/>
+				<a class="uk-button uk-button-primary" href="<?php echo $this->url('perfil' , array('action' => 'editar-perfil'));?>">Editar perfil</a>
+			</div>			
+		</div>
+	</div>
+</div>
+
+<script src="<?= $this->basePath('js/cambiar-imagen-perfil.js')?>"></script>
+

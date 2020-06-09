@@ -1,0 +1,65 @@
+<?php 
+if (defined('RUNNING_FROM_ROOT')) {
+    //$this->plugin('basePath')->setBasePath($this->basePath().'/public'); 
+} ?>
+
+<?php echo $this->doctype(); ?>
+
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <?= $this->headTitle('Karius - Sistema de Gestión de Traslados')->setSeparator(' - ')->setAutoEscape(false) ?>
+
+    <?= $this->headMeta()
+        ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+        ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+    ?>
+
+    <!-- Le styles -->
+    <?= $this->headLink(['rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon2.ico'])
+        ->appendStylesheet($this->basePath('css/uikit.min.css'))
+        ->appendStylesheet($this->basePath('css/kick-off/login-dark.css'))
+    ?>
+    
+    <!-- Scripts -->
+    <?= $this->headScript()            
+        ->appendFile($this->basePath('js/jquery-3.1.0.min.js'))
+        ->appendFile($this->basePath('js/jquery.disableAutoFill.min.js'))
+    ?>
+
+</head>
+<body class="login uk-cover-container uk-background-secondary uk-flex uk-flex-center uk-flex-middle uk-height-viewport uk-overflow-auto uk-light" data-uk-height-viewport>      
+          
+    <!-- overlay -->
+    <div class="uk-position-cover uk-overlay-primary"></div>
+    <!-- /overlay -->
+    <div class="uk-position-bottom-center uk-position-small uk-visible@m uk-position-z-index">
+    	<p class="uk-text-small uk-text-center">&copy; <?= date('Y') ?> por Rafael Contreras. Todos los derechos reservados. | <?= \Admin\Module::VERSION ?></p>
+    </div>
+
+    <div class="uk-width-medium uk-padding-small uk-position-z-index" uk-scrollspy="cls: uk-animation-fade">
+    	<!--    Renderizar mensajes -->
+        <?php 
+            $flash = $this->flashMessenger();
+            $flash->setMessageOpenFormat('<div%s uk-alert>
+                                    <a class="uk-alert-close" uk-close="duration: 500"></a>
+                                    <p>')
+                                    ->setMessageSeparatorString('</p><p>')
+                                    ->setMessageCloseString('</p></div>');
+        ?>
+        <?php echo $this->flashMessenger()->render('info', ["uk-alert uk-alert-primary"]); ?>
+    	<?php echo $this->flashMessenger()->render('error', ["uk-alert uk-alert-danger"]); ?>
+        <!--    Renderizar mensajes -->
+    	
+    	<?php echo $this->content; ?>
+    	
+    </div>
+    <!-- JS FILES -->
+	<?= $this->inlineScript()
+    	 ->appendFile($this->basePath('js/uikit.min.js'))
+    	 ->appendFile($this->basePath('js/uikit-icons.min.js'))
+    	 ->appendFile($this->basePath('js/custom.js'))
+	?> 
+</body>
+</html>
+

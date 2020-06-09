@@ -1,0 +1,91 @@
+<?php // module/Application/view/empleos/index/listar-terrenos.phtml: ?>
+
+<?php
+$title = 'Listado de docentes';
+$this->headTitle($title);
+?>
+
+<div class="uk-container uk-container-expand uk-padding-small">
+
+<h2 class="uk-text-center"><?= $this->escapeHtml($title) ?></h2>
+
+<?php
+    if ($this->messages):
+        foreach ($this->messages as $msg):
+            ?>
+            <div class="uk-label-success uk-padding-small uk-margin"><?php echo $msg; ?></div>
+        <?php
+        endforeach;
+    endif;
+?>
+<?php
+if ($this->errorMessages):
+    foreach ($this->errorMessages as $msg):
+        ?>
+			<div class="uk-label-danger uk-padding-small uk-margin">                         
+				<?php echo $msg; ?>
+			</div>
+		<?php
+		endforeach;
+	endif;
+?>
+
+<?php if ($this->docentes->count() != 0): ?>
+
+    <table class="uk-table uk-table-hover uk-table-divider uk-table-striped">
+	    <thead>
+	    <tr>
+	        <th>N°</th>			        
+	        <th>Código</th>
+	        <th>Nombres</th>
+	        <th>Apellidos</th>
+	        <th>Correo</th>
+	        <th>Teléfono</th>
+	        <th>Acciones</th>
+	    </tr>
+	    </thead>
+	    <tbody>
+	    <?php
+	    	$i = 0;
+	    	foreach ($this->docentes as $docente) :
+			$i++;
+		?>    
+	    <tr>
+	        <td><?php echo $i;?></td>
+	        
+	        <td><?php echo $this->escapeHtml($docente->codigo);?></td>
+	        
+	        <td><?php echo $this->escapeHtml($docente->nombres);?></td>
+	        
+	        <td><?php echo $this->escapeHtml($docente->primerApellido . " " . $docente->segundoApellido);?></td>
+	        
+	        <td><?php echo $this->escapeHtml($docente->correo);?></td>
+	        
+	        <td><?php echo $this->escapeHtml($docente->telefono);?></td>	               
+	        
+	        <td>	        	
+    	        <a class="uk-button uk-button-default" href=" 
+        	        <?php echo $this->url('admin', [
+        	            'action' => 'listar-cursos',
+        	            'codusuario' => $docente->codUsuario
+        	        ]); ?>">Ver cursos</a>
+			
+	        	<a class="uk-button uk-button-primary" href="
+    	        	<?php echo $this->url('admin', [
+    					'action'    => 'listar-pedidos',
+    	        	    'codusuario'  => $docente->codUsuario
+    				]); ?>">Ver pedidos</a>
+			</td>
+	    </tr>
+	    <?php endforeach; ?>
+	    </tbody>
+	</table>
+    
+<?php else:?>
+	
+		<p>¡No se han encontrado resultados!</p>
+		<a class="uk-button uk-button-primary" href="<?php echo $this->url('home'); ?>">Volver</a>
+
+<?php endif;?>
+
+</div>

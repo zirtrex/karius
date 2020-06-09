@@ -1,0 +1,48 @@
+<?php
+	$form = $this->form;
+	$form->setAttributes(array('action' => $this->url('reestablecer-clave', ['action' => 'confirmar-cambio-clave', 'token' => $this->token])));
+	$form->prepare();
+	
+	$helper = $this->formElementErrors();
+	$helper->setMessageOpenFormat('<div class="uk-alert uk-alert-danger">');
+	$helper->setMessageSeparatorString('</div><div class="uk-alert uk-alert-danger">');
+	$helper->setMessageCloseString('</div>');
+?>
+<div class="uk-text-center uk-margin">
+	<h3><i uk-icon="icon: unlock"></i>Cambiar Clave</h3>
+</div>
+
+<?php echo $this->form()->openTag($form); ?>
+    
+	<?php echo $this->formHidden($form->get('csrf')) ?>
+	<?php echo $helper->render($form->get('csrf')); ?>
+	
+	<?php echo $this->formHidden($form->get('token')) ?>
+	<?php echo $helper->render($form->get('token')); ?>
+	
+	
+	<div class="uk-margin">
+		<?php //echo $this->formLabel($form->get('nuevaClave')); ?>
+		<?php echo $this->formInput($form->get('nuevaClave')); ?>
+		<?php echo $helper->render($form->get('nuevaClave')); ?>
+		
+	</div>			
+
+	<div class="uk-margin">
+	   <?php //echo $this->formLabel($form->get('confirmarNuevaClave')) ?>
+	   <?php echo $this->formInput($form->get('confirmarNuevaClave')); ?>
+	   <?php echo $helper->render($form->get('confirmarNuevaClave')); ?>
+	</div>         	                 
+
+	<div class="uk-margin">                                                               
+		<?php echo $this->formInput($form->get('enviar')); ?>
+		<?php echo $helper->render($form->get('enviar')); ?>
+	</div>
+            
+<?php echo $this->form()->closeTag($form);?>
+
+<div class="uk-text-center">
+	<a class="uk-link-reset uk-text-small" href="<?php echo $this->url('ingresar');?>">Iniciar sesión</a>
+</div>
+	
+

@@ -1,0 +1,25 @@
+<?php
+
+return [
+	'db' => [
+		'username' => '',
+		'password' => '' 
+	],
+    
+    'mail' => [
+        'transport' => array(
+            'options' => array(
+                //'host' => 'mail.yahoo.com',
+                'name' => 'smtp.gmail.com',
+                'host' => 'smtp.gmail.com',
+                'connection_class'  => 'login',
+                'port' => '587', //2525 578
+                'connection_config' => array(
+                    'username' => '',
+                    'password' => '',
+                    'ssl' => 'tls'
+                ),
+            ),
+        ),
+    ],
+];

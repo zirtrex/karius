@@ -1,0 +1,64 @@
+<a href="<?php echo $this->url("cliente"); ?>" class="uk-button uk-button-link uk-button-small">
+	<span data-uk-icon="icon: reply"></span>Volver
+</a>
+
+<div class="uk-card uk-card-default uk-card-small uk-card-hover">
+<div class="uk-card-header">
+	<h3><?php echo $this->text;?> Cliente</h3>
+</div>
+<div class="uk-card-body">
+	<?php if ($this->action != "eliminar-cliente"): ?>
+		<?php 
+    		$form = $this->form;
+    		$form->setAttribute('action', $this->url('cliente', array('action' => $this->action)));
+    		$form->setAttribute('class', 'uk-form-horizontal');
+    		$form->prepare();
+    		
+    		$helper = $this->formElementErrors();
+    		$helper->setMessageOpenFormat('<div class="uk-alert uk-alert-danger">');
+    		$helper->setMessageSeparatorString('</div><div class="uk-alert uk-alert-danger">');
+    		$helper->setMessageCloseString('</div>');
+		?>
+		
+		<?php echo $this->form()->openTag($form);?>	
+				
+			<?php echo $this->formHidden($form->get('cod_cliente')); ?>				
+			
+			<div class="uk-margin">
+				<?php echo $this->formLabel($form->get('razon_social')) ?>
+				<div class="uk-form-controls">			
+    				<?php echo $this->formInput($form->get('razon_social')); ?>
+    				<?php echo $helper->render($form->get('razon_social'));?>
+				</div>
+			</div>
+			
+			<div class="uk-margin">
+				<?php echo $this->formLabel($form->get('direccion_legal')) ?>
+				<div class="uk-form-controls">
+					<?php echo $this->formInput($form->get('direccion_legal')); ?>
+					<?php echo $helper->render($form->get('direccion_legal'));?>
+				</div>
+			</div>		
+			
+			<div class="uk-margin">
+				<div class="">
+					<?php echo $this->formInput($form->get('guardar')); ?>
+				</div>
+			</div>		
+		<?php echo $this->form()->closeTag($form);?>
+	<?php else: ?>
+		 <h3>¿Esta seguro que desea eliminar el cliente: <strong><?php echo $this->escapeHtml($this->Cliente->razon_social);?></strong>?</h3>
+
+         <p class="uk-text-danger">La eliminación es definitiva e irreversible</p>
+         
+         <form action="<?php echo $this->url('cliente', array('action' => 'eliminar-cliente')); ?>" method="post">
+        
+        	 <input type="hidden" name="cod_cliente" value="<?php echo (int) $this->Cliente->cod_cliente; ?>" />
+        	 <input type="hidden" name="razon_social" value="<?php echo $this->Cliente->razon_social; ?>" />
+        	 <input type="submit" name="eliminar" value="si" class="uk-button uk-button-secondary"/>
+        	 <input type="submit" name="eliminar" value="no" class="uk-button uk-button-defalut"/>
+        
+         </form>
+	<?php endif; ?>
+</div>
+</div>

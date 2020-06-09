@@ -1,0 +1,66 @@
+<div class="uk-container uk-padding">
+
+	<div class="ul-grid" uk-grid>
+
+		<div class="uk-width-1-2">
+    		<h3>Reportes</h3>
+    
+        	<p>Resumen de terrenos que tienen al menos un pago</p>
+        
+        	<hr/>
+			<table class="uk-table uk-table-striped">
+				<thead>
+				<tr>
+					<th style="text-align: center;">Terrenos Totales</th>
+					<th style="text-align: center;">Pagados</th>
+					<th style="text-align: center;">Sin Pagar</th>
+				</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td style="text-align: center;"><?=$this->totalTerrenos; ?></td>
+			        	<td style="text-align: center;"><?=$this->tPagados; ?></td>
+			        	<td style="text-align: center;"><?=$this->tSinPagar; ?></td>
+			    	</tr>
+			    </tbody>
+			</table>
+			
+			<h3>Otros reportes:</h3>
+			<hr/>
+        	<div>
+        		<p><a href="<?php echo $this->url('reportes', [
+                        'controller' => 'reporte',
+                        'action' => 'index',
+                    ]); ?>" >Reporte total de terrenos</a></p>
+        	</div>
+		</div>
+		<div class="uk-width-1-2">
+			<canvas id="myChart" width="300" height="150"></canvas>
+		</div>
+	</div>	
+
+	<script>
+		var totalTerrenos = <?=$this->totalTerrenos; ?>;
+		var tPagados = <?=$this->tPagados; ?>;
+		var tSinPagar = <?=$this->tSinPagar; ?>;
+
+		var ctx = document.getElementById("myChart");
+		var myChart = new Chart(ctx, {
+		    type: 'pie',
+		    data: {
+		        labels: ["Pagados", "Sin Pagar"],
+		        datasets: [
+		        {
+		            label: 'Pagos',
+		            data: [tPagados, tSinPagar],
+		            backgroundColor: ['rgba(0, 255, 0, 0.2)', 'rgba(255, 0, 0, 0.2)'],
+		            borderColor: ['rgba(0, 255, 0, 1)', 'rgba(255, 0, 0, 1)'],
+		            borderWidth: 1
+		        }
+		        ]
+		    },
+		    options: {
+		    }
+		});
+	</script>
+</div>	

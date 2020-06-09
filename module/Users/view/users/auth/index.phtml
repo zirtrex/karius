@@ -1,0 +1,65 @@
+<?php
+    $form = $this->form;
+    $form->setAttribute('action', $this->url('ingresar'));
+    $form->prepare();
+    
+    $helper = $this->formElementErrors();
+    $helper->setMessageOpenFormat('<div class="uk-alert uk-alert-danger">');
+    $helper->setMessageSeparatorString('</div><div class="uk-alert uk-alert-danger">');
+    $helper->setMessageCloseString('</div>');
+?>
+
+<script src='https://www.google.com/recaptcha/api.js'></script>
+<script>
+   function onSubmit(token) {
+     document.getElementById("loginForm").submit();
+   }
+</script>
+	
+<div class="uk-text-center uk-margin">
+	<h3><i uk-icon="icon: sign-in"></i>Ingresar</h3>
+</div>
+
+<?php echo $this->form()->openTag($form); ?>	
+	
+	<div class="uk-margin">    	
+    	<?php echo $this->formHidden($form->get('csrf')) ?>
+    	<?php echo $helper->render($form->get('csrf')); ?>
+    </div>               
+
+    <div class="uk-margin">
+    	<?php //echo $this->formLabel($form->get('usuario')) ?>
+    	<div class="uk-form-controls">
+        	<?php echo $this->formInput($form->get('usuario')); ?>
+        	<?php echo $helper->render($form->get('usuario')); ?>
+        </div>
+    </div>
+    
+    <div class="uk-margin">
+       	<?php //echo $this->formLabel($form->get('clave')) ?>
+       	<div class="uk-form-controls">
+       		<?php echo $this->formInput($form->get('clave')); ?>
+       		<?php echo $helper->render($form->get('clave')); ?>
+       	</div>
+    </div>
+    
+    <div class="uk-margin">
+    	<?php echo $this->formInput($form->get('ingresar')); ?>
+    	<div class="uk-form-controls">
+			<?php echo $helper->render($form->get('ingresar')); ?>
+		</div>
+    </div>
+    
+<?php echo $this->form()->closeTag($form);?>
+
+<div>
+	<div class="uk-text-center">
+		<a class="uk-link-reset uk-text-small" href="<?php echo $this->url('reestablecer-clave');?>">¿Olvidaste tu clave?</a>
+	</div>
+</div>
+	      
+	
+
+
+
+

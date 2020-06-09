@@ -1,0 +1,67 @@
+<?php
+$title = 'Cursos';
+$this->headTitle($title);
+?>
+
+<div class="uk-container uk-container-expand uk-padding-small">
+	
+	<h2 class="uk-text-center"><?= $this->escapeHtml($title) ?></h2>
+
+	<p>
+		Docente: <strong><?php echo $this->usuario->nombres . " " . $this->usuario->primerApellido . " " . $this->usuario->segundoApellido;?></strong> -
+		<a class="uk-button uk-button-default" 
+		href="<?php echo $this->url("admin", [
+								     'action' => 'listar-usuarios'
+		                     ]); ?>">Seleccionar otro docente</a>
+	</p>
+
+	<?php if($this->cursos->count() != 0): ?>	
+	<table class="uk-table uk-table-hover uk-table-striped">
+	    <thead>
+	    <tr>
+	        <th>N°</th>
+	        <th>Semestre</th>
+	        <th>Escuela</th>
+	        <th>Curso</th>	        
+	        <th>-</th>
+	    </tr>
+	    </thead>
+	    <tbody>
+	    <?php
+	    	$i = 0;
+	    	foreach ($this->cursos as $curso) :
+			$i++;
+		?>    
+	    <tr>
+	        <td><?php echo $i;?></td>
+	        
+	        <td><?php echo $this->escapeHtml($curso['semestre']);?></td>
+	        
+	        <td><?php echo $this->escapeHtml($curso['nombreEscuela']);?></td>	       
+	        
+	        <td><?php echo $this->escapeHtml($curso['nombreCurso']);?></td>	        
+	        
+	        <td>			        												
+				<a href="<?php echo $this->url('admin', 
+            	    ['action'  => 'listar-pedidos',
+                        'codusuario' => $this->codUsuario,
+            	        'semestre' => $this->escapeHtml($curso['semestre']),
+            	        'codescuela' => $curso['codEscuela'],
+            	        'codcurso' => $curso['codCurso']            	        
+				]); ?>" class="uk-button uk-button-primary">Ver pedidos</a>
+			</td>
+			
+	    </tr>
+	    <?php endforeach; ?>
+	    </tbody> 
+	</table>
+	
+	<?php else: ?>
+		<h1>Aún no has realizado ningún pedido.</h1>
+		<h3><a class="uk-button uk-button-default" href="<?= $this->url('docente', ['action' => 'nuevo-pedido']) ?>">Click aquí para realizar un nuevo pedido.</a></h3>
+	<?php endif;?>
+	
+</div>
+	
+
+

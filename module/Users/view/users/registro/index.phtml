@@ -1,0 +1,99 @@
+<?php 
+    $form = $this->form;
+    $form->setAttribute('action', $this->url('registro'));
+    $form->prepare();
+    
+    $helper = $this->formElementErrors();
+    $helper->setMessageOpenFormat('<div class="uk-alert uk-alert-danger">');
+    $helper->setMessageSeparatorString('</div><div class="uk-alert uk-alert-danger">');
+    $helper->setMessageCloseString('</div>');
+?>
+
+<script src='https://www.google.com/recaptcha/api.js'></script>
+<script>
+   function onSubmit(token) {
+     document.getElementById("registro-form").submit();
+   }
+</script>
+ 
+<div class="uk-text-center uk-margin">
+	<h3><i uk-icon="icon: unlock"></i>Registro</h3>
+</div>
+
+<?php echo $this->form()->openTag($form); ?>    
+	
+    <div class="uk-child-width-1-1@s" uk-grid>
+    	
+    	<div class="uk-margin-small">
+			<?php //echo $this->formLabel($form->get('nombres')) ?>
+			<div class="uk-form-controls">
+				<?php echo $this->formInput($form->get('nombres')); ?>
+				<?php echo $helper->render($form->get('nombres'));?>
+			</div>			    			
+		</div>
+	
+		<div class="uk-margin-small">
+			<?php //echo $this->formLabel($form->get('apellidos')) ?>
+			<div class="uk-form-controls">
+				<?php echo $this->formInput($form->get('apellidos')); ?>
+				<?php echo $helper->render($form->get('apellidos'));?>
+			</div>			    			
+		</div>   		
+	
+		<div class="uk-margin-small">
+			<?php //echo $this->formLabel($form->get('correo')) ?>
+			<div class="uk-form-controls">
+				<?php echo $this->formInput($form->get('correo')); ?>
+				<?php echo $helper->render($form->get('correo'));?>
+			</div>			    			
+		</div>
+		
+		<div class="uk-margin-small">
+			<?php //echo $this->formLabel($form->get('telefono')) ?>
+			<div class="uk-form-controls">
+				<?php echo $this->formInput($form->get('telefono')); ?>
+				<?php echo $helper->render($form->get('telefono'));?>
+			</div>			    			
+		</div>
+
+        <div class="uk-margin-small">
+        	<?php //echo $this->formLabel($form->get('usuario')) ?>
+        	<div class="uk-form-controls">
+            	<?php echo $this->formInput($form->get('usuario')); ?>
+            	<?php echo $helper->render($form->get('usuario'));?>
+            </div>            
+        </div>
+        
+        <div class="uk-margin-small">
+           <?php //echo $this->formLabel($form->get('clave')) ?>
+           <div class="uk-form-controls">
+           	<?php echo $this->formInput($form->get('clave')); ?>
+           	<?php echo $helper->render($form->get('clave'));?>
+           </div>
+           
+        </div>
+        
+        <div class="uk-margin-small">
+           <?php //echo $this->formLabel($form->get('confirmarClave')) ?>
+           <div class="uk-form-controls">
+           	<?php echo $this->formInput($form->get('confirmarClave')); ?>
+           	<?php echo $helper->render($form->get('confirmarClave')); ?>
+           </div>           
+        </div>    
+    </div>
+    
+    <div class="uk-margin-small">
+        <?php echo $this->formInput($form->get('registrarse')); ?>
+        <div class="uk-form-controls">
+    		<?php echo $helper->render($form->get('registrarse')); ?>
+    	</div>
+    </div>
+            
+<?php echo $this->form()->closeTag($form);?>
+
+<div class="uk-text-center">
+	<a class="uk-link-reset uk-text-small" href="<?php echo $this->url('ingresar');?>">Ya tengo una cuenta</a>
+</div>
+	
+
+

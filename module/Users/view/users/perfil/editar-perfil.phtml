@@ -1,0 +1,118 @@
+<?php 
+    $usuario = $this->usuario_helper($this->identity()['cod_usuario']);
+    
+    $helper = $this->formElementErrors();
+    $helper->setMessageOpenFormat('<div class="uk-alert uk-alert-danger">');
+    $helper->setMessageSeparatorString('</div><div class="uk-alert uk-alert-danger">');
+    $helper->setMessageCloseString('</div>');
+?>
+
+<p><span uk-icon="icon: reply"></span><a class="" href="<?php echo $this->url('perfil');?>">Volver</a></p>
+
+<div class="uk-card uk-card-default uk-card-small uk-card-hover">
+<div class="uk-card-header">
+	<h3>Editar perfil</h3>		
+</div>
+<div class="uk-card-body">
+<div class="" uk-grid>
+	<div class="uk-width-1-2@l"><!-- EDITAR USUARIO -->
+		<?php 
+			$editarUsuarioForm = $this->editarUsuarioForm;
+			$editarUsuarioForm->setAttribute('action', $this->url('perfil', array('action' => 'editar-perfil')));
+			$editarUsuarioForm->setAttribute('class', 'uk-form-horizontal');
+			$editarUsuarioForm->prepare();
+		?>
+		<?php echo $this->form()->openTag($editarUsuarioForm);?>
+
+			<?php echo $this->formHidden($editarUsuarioForm->get('csrf')); ?>
+			
+			<?php echo $this->formHidden($editarUsuarioForm->get('cod_usuario')); ?>
+			
+			<?php echo $this->formHidden($editarUsuarioForm->get('rol')); ?>
+
+			<div class="uk-margin">
+				<?php echo $this->formLabel($editarUsuarioForm->get('nombres')) ?>
+				<div class="uk-form-controls">
+					<?php echo $this->formInput($editarUsuarioForm->get('nombres')); ?>
+					<?php echo $helper->render($editarUsuarioForm->get('nombres'));?>
+				</div>
+			</div>
+
+			<div class="uk-margin">
+				<?php echo $this->formLabel($editarUsuarioForm->get('apellidos')) ?>
+				<div class="uk-form-controls">
+					<?php echo $this->formInput($editarUsuarioForm->get('apellidos')); ?>	
+					<?php echo $helper->render($editarUsuarioForm->get('apellidos'));?>
+				</div>
+			</div>
+			
+			<div class="uk-margin">
+				<?php echo $this->formLabel($editarUsuarioForm->get('correo')) ?>
+				<div class="uk-form-controls">
+					<?php echo $this->formInput($editarUsuarioForm->get('correo')); ?>
+					<?php echo $helper->render($editarUsuarioForm->get('correo'));?>
+				</div>
+			</div>
+			
+			<div class="uk-margin">
+				<?php echo $this->formLabel($editarUsuarioForm->get('telefono')) ?>
+				<div class="uk-form-controls">
+					<?php echo $this->formInput($editarUsuarioForm->get('telefono')); ?>
+					<?php echo $helper->render($editarUsuarioForm->get('telefono'));?>
+				</div>
+			</div>						
+			
+			<div class="uk-margin">						
+				<?php echo $this->formElement($editarUsuarioForm->get('guardar')); ?>						
+			</div>						
+
+		<?php echo $this->form()->closeTag(); ?>				
+	</div><!-- EDITAR USUARIO END -->
+	
+	<div class="uk-width-1-2@l"><!-- CAMBIO CLAVE -->
+		<?php 
+			$cambiarClaveForm = $this->cambiarClaveForm;
+			$cambiarClaveForm->setAttribute('action', $this->url('perfil', array('action' => 'cambiar-clave')));
+			$cambiarClaveForm->setAttribute('class', 'uk-form-horizontal');
+			$cambiarClaveForm->prepare();
+		?>
+		<?php echo $this->form()->openTag($cambiarClaveForm);?>
+
+			<?php echo $this->formHidden($cambiarClaveForm->get('csrf')); ?>
+
+			<div class="uk-margin">
+				<?php echo $this->formLabel($cambiarClaveForm->get('anteriorClave')) ?>
+				<div class="uk-form-controls">
+					<?php echo $this->formInput($cambiarClaveForm->get('anteriorClave')); ?>
+					<?php echo $helper->render($cambiarClaveForm->get('anteriorClave'));?>
+				</div>
+			</div>
+
+			<div class="uk-margin">
+				<?php echo $this->formLabel($cambiarClaveForm->get('nuevaClave')) ?>
+				<div class="uk-form-controls">
+					<?php echo $this->formInput($cambiarClaveForm->get('nuevaClave')); ?>	
+					<?php echo $helper->render($cambiarClaveForm->get('nuevaClave'));?>
+				</div>
+			</div>
+
+			<div class="uk-margin">
+				<?php echo $this->formLabel($cambiarClaveForm->get('confirmarNuevaClave')) ?>
+				<div class="uk-form-controls">
+					<?php echo $this->formInput($cambiarClaveForm->get('confirmarNuevaClave')); ?>
+					<?php echo $helper->render($cambiarClaveForm->get('confirmarNuevaClave'));?>
+				</div>
+			</div>
+			
+			<div class="uk-margin">
+				<div class="">
+					<?php echo $this->formElement($cambiarClaveForm->get('enviar')); ?>
+				</div>
+			</div>										
+
+		<?php echo $this->form()->closeTag(); ?>	
+	</div><!-- CAMBIO CLAVE END -->			
+</div>
+</div>
+</div>
+

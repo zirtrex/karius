@@ -1,0 +1,60 @@
+<?php
+    $url_order = ($this->order == 'ASC') ? 'DESC' : 'ASC';
+    $title = 'Clientes';
+    $this->headTitle($title);
+?>
+
+<div class="uk-card uk-card-default uk-card-small uk-card-hover">
+<div class="uk-card-header">
+	<h2><span data-uk-icon="icon: users; ratio: 2"></span><?= $this->escapeHtml($title) ?></h2>	
+</div>
+<div class="uk-card-body">
+
+	<a href="<?php echo $this->url("cliente", array('action' => 'agregar-cliente')); ?>" class="uk-button uk-button-add uk-button-small"><span data-uk-icon="icon: plus"></span>Agregar</a>
+    
+    <table class="uk-table uk-table-hover uk-table-striped">
+        <thead>
+        <tr>
+            <th>Código</th>
+            <th>Razón Social</th>	        
+            <th>Dirección Legal</th>
+            <th>-</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php
+        	foreach ($this->clientes as $cliente) :
+    	?>    
+        <tr>
+            <td><?= $this->escapeHtml($cliente->cod_cliente); ?></td>        
+            
+            <td><?php echo $this->escapeHtml($cliente->razon_social);?></td>      
+            
+            <td><?php echo $this->escapeHtml($cliente->direccion_legal);?></td>
+            
+            <td>
+            	<a  href="<?php echo $this->url('almacen', [
+            	    'action'       => 'index',
+            	    'cod_almacen'  => 0,
+            	    'cod_cliente'  => $cliente->cod_cliente
+    			]); ?>" class="uk-button uk-button-edit uk-button-small"><span data-uk-icon="icon: database"></span> Ver almacenes</a>
+            
+            	<a  href="<?php echo $this->url('cliente', [
+            	    'action'    => 'editar-cliente',
+            	    'cod_cliente'  => $cliente->cod_cliente
+    			]); ?>" class="uk-button uk-button-edit uk-button-small"><span data-uk-icon="icon: pencil"></span> Editar</a>
+    			
+    			<a  href="<?php echo $this->url('cliente', [
+            	    'action'    => 'eliminar-cliente',                
+            	    'cod_cliente'  => $cliente->cod_cliente     	    	        	    
+    			]); ?>" class="uk-button uk-button-delete uk-button-small"><span data-uk-icon="icon: trash"></span> Eliminar</a>
+    		</td>
+        </tr>
+        <?php endforeach; ?>
+        </tbody> 
+    </table>
+    
+    <?php echo $this->paginationControl($this->clientes, 'Sliding', 'paginator', array('route' => 'cliente', 'action' => 'index', 'orderby' => $this->orderby, 'order' => $order));?>
+ 
+</div>
+</div>

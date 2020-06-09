@@ -1,0 +1,128 @@
+<?= $this->doctype() ?>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <?= $this->headTitle('Karius - Sistema de Gestión de Traslados')->setSeparator(' - ')->setAutoEscape(false) ?>
+
+    <?= $this->headMeta()
+        ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+        ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+    ?>
+
+    <!-- Le styles -->
+    <?= $this->headLink(['rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.png'])
+        ->appendStylesheet($this->basePath('css/uikit.css'))
+        ->appendStylesheet($this->basePath('css/style.css'))
+        ->appendStylesheet($this->basePath('css/kick-off/dashboard.css'));
+        
+    ?>
+
+    <!-- Scripts -->
+    <?= $this->headScript()
+        //->prependFile('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js')
+        ->prependFile($this->basePath('js/custom.js'))
+        ->prependFile($this->basePath('js/uikit-icons.min.js'))
+        ->prependFile($this->basePath('js/uikit.min.js'))
+        ->prependFile($this->basePath('js/jquery-3.1.0.min.js'))
+    ?>
+</head>
+<body class="usuarios">    
+            
+    <div id="offcanvas-usage" uk-offcanvas="flip: true; mode; mode: reveal; overlay: true">
+        <div class="uk-offcanvas-bar">        
+            <button class="uk-offcanvas-close" type="button" uk-close></button>
+                <?php 
+            	   echo $this->navigation('navigation')
+                          ->menu()
+                          ->setMinDepth(0)
+                          ->setMaxDepth(0)
+                          ->setUlClass('uk-nav uk-nav-primary');
+                ?>
+        </div>
+    </div>   
+    	
+    <header id="" class="uk-box-shadow-small">
+		<div class="uk-container uk-container-expand uk-background-primary">
+            <nav class="uk-navbar uk-light" uk-navbar>
+            	<div class="uk-navbar-left">                		
+            		<a class="uk-navbar-item uk-logo" href="<?= $this->url('home') ?>">
+            			<img src="<?= $this->basePath('img/logo.jpeg') ?>" width="auto" height="50px" uk-img/>
+                       	<?= \Admin\Module::VERSION ?>
+                    </a>
+                    <div class="uk-navbar-nav uk-visible@m uk-visible@l uk-margin-right">
+                    	<?php 
+                    	   echo $this->navigation('navigation')
+                                  ->menu()
+                                  ->setMinDepth(0)
+                                  ->setMaxDepth(0)
+                                  ->setUlClass('uk-navbar-nav');
+                        ?>
+                    </div>
+                    <div class="uk-navbar-item uk-visible@s">
+					<?php 
+					  if (isset($this->buscarForm) && isset($this->route)):							
+						     $searchForm = $this->buscarForm;
+						     $searchForm->get("texto")->setValue($texto);
+						     $searchForm->setAttribute('class', 'uk-search uk-search-default');
+						     $buscarForm->setAttribute('action', $this->url($this->route));
+						     $searchForm->prepare();
+						     echo $this->form()->openTag($searchForm);
+						     echo "<span data-uk-search-icon></span>";
+						     echo $this->formInput($searchForm->get('texto'));
+						     echo $this->formSubmit($searchForm->get('buscar'));
+						     echo $this->form()->closeTag();							   						
+				       endif; 
+				   ?>
+				</div>
+        			<a class="uk-navbar-toggle uk-hidden@m uk-hidden@l" href="#offcanvas-usage" uk-toggle>
+                       <span class="uk-margin-small-right">Menu</span> <span uk-navbar-toggle-icon></span> 
+                    </a>                                        
+                </div>                
+        		<div class="uk-navbar-right">
+        			<ul class="uk-navbar-nav">
+        				<?php if ($this->identity()): ?>
+            				<li><a href="#" class="" data-uk-icon="icon: triangle-down; ratio: 0.7">
+            					Bienvenido: &nbsp;&nbsp;<strong> <?= $this->identity()['usuario'] ?></strong></a>
+            					<div class="uk-dropdown user-drop" data-uk-dropdown="mode: click; pos: bottom-center; animation: uk-animation-slide-bottom-small; duration: 150">
+            						<ul class="uk-nav uk-dropdown-nav uk-text-left">
+            							<li><a href="<?= $this->url('perfil') ?>" class="">Perfil</a></li>
+            							<li><a href="<?= $this->url('salir') ?>" class="">Salir</a></li>
+            						</ul>
+            					</div>
+            				</li>
+        				<?php else: ?>
+        					<li><a href="<?= $this->url('ingresar') ?>" class="" data-uk-icon="icon: sign-in">Iniciar sesión</a></li>
+        				<?php endif;?>        				
+        			</ul>	
+        		</div>
+            </nav>
+    	</div>
+    </header>        
+    
+    <div data-uk-height-viewport="expand: true">
+    	<div class="uk-container uk-container-expand uk-padding-small" >
+    	
+    		<!--    Renderizar mensajes -->
+            <?php 
+                $flash = $this->flashMessenger();
+                $flash->setMessageOpenFormat('<div%s uk-alert>
+                                        <a class="uk-alert-close" uk-close="duration: 500"></a>
+                                        <p>')
+                                        ->setMessageSeparatorString('</p><p>')
+                                        ->setMessageCloseString('</p></div>');
+            ?>
+            <?php echo $this->flashMessenger()->render('info', ["uk-alert uk-alert-primary"]); ?>
+        	<?php echo $this->flashMessenger()->render('error', ["uk-alert uk-alert-danger"]); ?>
+            <!--    Renderizar mensajes -->
+    	
+        	<?php echo $this->content; ?>
+        </div>
+    </div>    
+    
+    <footer class="uk-section uk-section-small uk-text-center">
+    	<hr>
+        <strong>&copy; <?= date('Y') ?> por Rafael Contreras. Todos los derechos reservados. | <?= \Admin\Module::VERSION ?></strong>
+    </footer>        
+
+</body>    
+</html>

@@ -1,0 +1,55 @@
+<?php
+    $url_order = ($this->order == 'ASC') ? 'DESC' : 'ASC';
+    $title = 'Vehiculos';
+    $this->headTitle($title);
+?>
+
+<div class="uk-card uk-card-default uk-card-small uk-card-hover">
+<div class="uk-card-header">
+	<h2><span data-uk-icon="icon: world; ratio: 2"></span><?= $this->escapeHtml($title) ?></h2>	
+</div>
+<div class="uk-card-body">
+
+	<a href="<?php echo $this->url("vehiculo", array('action' => 'agregar-vehiculo')); ?>" class="uk-button uk-button-add uk-button-small"><span data-uk-icon="icon: plus"></span>Agregar</a>
+    
+    <table class="uk-table uk-table-hover uk-table-striped">
+        <thead>
+        <tr>
+            <th>Código</th>
+            <th>Marca</th>	        
+            <th>Placa</th>
+            <th>Soat</th>
+            <th>-</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($this->vehiculos as $vehiculo): ?>    
+        <tr>
+            <td><?= $this->escapeHtml($vehiculo->cod_vehiculo); ?></td>        
+            
+            <td><?php echo $this->escapeHtml($vehiculo->marca);?></td>      
+            
+            <td><?php echo $this->escapeHtml($vehiculo->placa);?></td>
+            
+            <td><?php echo $this->escapeHtml($vehiculo->soat);?></td>
+            
+            <td>
+            	<a href="<?php echo $this->url('vehiculo', [
+            	    'action'    => 'editar-vehiculo',
+            	    'cod_vehiculo'  => $vehiculo->cod_vehiculo
+    			]); ?>" class="uk-button uk-button-edit uk-button-small"><span data-uk-icon="icon: pencil"></span>Editar</a>
+    			
+    			<a href="<?php echo $this->url('vehiculo', [
+            	    'action'    => 'eliminar-vehiculo',                
+    			    'cod_vehiculo'  => $vehiculo->cod_vehiculo
+    			]); ?>" class="uk-button uk-button-delete uk-button-small"><span data-uk-icon="icon: trash"></span>Eliminar</a>
+    		</td>
+        </tr>
+        <?php endforeach; ?>
+        </tbody> 
+    </table>
+    
+    <?php echo $this->paginationControl($this->vehiculos, 'Sliding', 'paginator', array('route' => 'vehiculo', 'action' => 'index', 'orderby' => $this->orderby, 'order' => $order));?>
+ 
+</div>
+</div>

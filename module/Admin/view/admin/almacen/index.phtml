@@ -1,0 +1,62 @@
+<?php
+    $title = 'Almacenes';
+    $this->headTitle($title);
+?>
+
+<div class="uk-card uk-card-default uk-card-small uk-card-hover">
+<div class="uk-card-header">
+	<h2><span data-uk-icon="icon: database; ratio: 2"></span><?= $this->escapeHtml($title) ?></h2>	
+</div>
+<div class="uk-card-body">
+
+	<a href="<?php echo $this->url("cliente"); ?>" class="uk-button uk-button-secondary uk-button-small"><span data-uk-icon="icon: arrow-left"></span>Ver clientes</a>
+
+	<a href="<?php echo $this->url("almacen", [
+        'action' => 'agregar-almacen',
+	    'cod_almacen'  => 0,
+        'cod_cliente'  => $this->cod_cliente	    
+	]); ?>" class="uk-button uk-button-add uk-button-small"><span data-uk-icon="icon: plus"></span>Agregar</a>
+    
+    <table class="uk-table uk-table-hover uk-table-striped">
+        <thead>
+        <tr>
+            <th>Código</th>
+            <th>Nombre</th>	        
+            <th>Dirección</th>
+            <th>Cliente</th>
+            <th>-</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php
+        foreach ($this->almacenes as $almacen) :
+    	?>    
+        <tr>
+            <td><?= $this->escapeHtml($almacen->cod_almacen); ?></td>        
+            
+            <td><?php echo $this->escapeHtml($almacen->nombre_almacen);?></td>      
+            
+            <td><?php echo $this->escapeHtml($almacen->direccion_almacen);?></td>
+            
+            <td><?php echo $this->escapeHtml($almacen->cod_cliente);?></td>
+            
+            <td>
+            	<a  href="<?php echo $this->url('almacen', [
+            	    'action'    => 'editar-almacen',
+            	    'cod_almacen'  => $almacen->cod_almacen,
+            	    'cod_cliente'  => $almacen->cod_cliente,
+    			]); ?>" class="uk-button uk-button-edit uk-button-small"><span data-uk-icon="icon: pencil"></span>Editar</a>
+    			
+    			<a  href="<?php echo $this->url('almacen', [
+            	    'action'    => 'eliminar-almacen',                
+            	    'cod_cliente'  => $almacen->cod_cliente,
+    			    'cod_almacen'  => $almacen->cod_almacen
+    			]); ?>" class="uk-button uk-button-delete uk-button-small"><span data-uk-icon="icon: trash"></span>Eliminar</a>
+    		</td>
+        </tr>
+        <?php endforeach; ?>
+        </tbody> 
+    </table>
+
+</div>
+</div>

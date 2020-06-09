@@ -1,0 +1,73 @@
+<a href="<?php echo $this->url("almacen", ['action' => 'index', 'cod_almacen' => $this->cod_almacen, 'cod_cliente' => $this->cod_cliente]); ?>" class="uk-button uk-button-link uk-button-small">
+	<span data-uk-icon="icon: reply"></span>Volver
+</a>
+
+<div class="uk-card uk-card-default uk-card-small uk-card-hover">
+<div class="uk-card-header">
+	<h3><?php echo $this->text;?> Almacen</h3>
+</div>
+<div class="uk-card-body">
+	<?php if ($this->action != "eliminar-almacen"): ?>
+		<?php 
+    		$form = $this->form;
+    		$form->setAttribute('action', $this->url('almacen', ['action' => $this->action, 'cod_almacen' => $this->cod_almacen, 'cod_cliente' => $this->cod_cliente]));
+    		$form->setAttribute('class', 'uk-form-horizontal');
+    		$form->prepare();
+    		
+    		$helper = $this->formElementErrors();
+    		$helper->setMessageOpenFormat('<div class="uk-alert uk-alert-danger">');
+    		$helper->setMessageSeparatorString('</div><div class="uk-alert uk-alert-danger">');
+    		$helper->setMessageCloseString('</div>');
+		?>
+		
+		<?php echo $this->form()->openTag($form);?>	
+				
+			<?php echo $this->formHidden($form->get('cod_almacen')); ?>
+			<?php echo $helper->render($form->get('cod_almacen'));?>
+			
+			<?php echo $this->formHidden($form->get('cod_cliente')); ?>
+			<?php echo $helper->render($form->get('cod_cliente'));?>				
+			
+			<div class="uk-margin">
+				<?php echo $this->formLabel($form->get('nombre_almacen')) ?>
+				<div class="uk-form-controls">			
+    				<?php echo $this->formInput($form->get('nombre_almacen')); ?>
+    				<?php echo $helper->render($form->get('nombre_almacen'));?>
+				</div>
+			</div>
+			
+			<div class="uk-margin">
+				<?php echo $this->formLabel($form->get('direccion_almacen')) ?>
+				<div class="uk-form-controls">
+					<?php echo $this->formInput($form->get('direccion_almacen')); ?>
+					<?php echo $helper->render($form->get('direccion_almacen'));?>
+				</div>
+			</div>		
+			
+			<div class="uk-margin">
+				<div class="">
+					<?php echo $this->formInput($form->get('guardar')); ?>
+				</div>
+			</div>		
+		<?php echo $this->form()->closeTag($form);?>
+	<?php else: ?>
+		 <h3>¿Esta seguro que desea eliminar el almacen: <strong><?php echo $this->escapeHtml($this->almacen->nombre_almacen);?></strong>?</h3>
+
+         <p class="uk-text-danger">La eliminación es definitiva e irreversible</p>
+         
+         <form action="<?php echo $this->url('almacen', [
+             'action' => 'eliminar-almacen',
+             'cod_almacen' => $this->almacen->cod_almacen,
+             'cod_cliente' => $this->almacen->cod_cliente
+         ]); ?>" method="post">
+        
+        	 <input type="hidden" name="cod_almacen" value="<?php echo (int) $this->almacen->cod_almacen; ?>" />
+        	 <input type="hidden" name="cod_cliente" value="<?php echo (int) $this->almacen->cod_cliente; ?>" />
+        	 <input type="hidden" name="nombre_almacen" value="<?php echo $this->almacen->nombre_almacen; ?>" />
+        	 <input type="submit" name="eliminar" value="si" class="uk-button uk-button-secondary"/>
+        	 <input type="submit" name="eliminar" value="no" class="uk-button uk-button-defalut"/>
+        
+         </form>
+	<?php endif; ?>
+</div>
+</div>

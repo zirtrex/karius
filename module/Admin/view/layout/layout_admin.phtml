@@ -1,0 +1,192 @@
+<?= $this->doctype() ?>
+
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <?= $this->headTitle('Karius - Sistema de Gestión de Traslados')->setSeparator(' - ')->setAutoEscape(false) ?>
+
+    <?= $this->headMeta()
+        ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+        ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+    ?>
+
+    <!-- Le styles -->
+    <?= $this->headLink(['rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.png'])
+        ->appendStylesheet($this->basePath('css/uikit.css'))        
+        ->appendStylesheet($this->basePath('css/kick-off/dashboard.css'))
+        ->appendStylesheet($this->basePath('css/style.css'));
+    ?>
+
+    <!-- Scripts -->
+    <?= $this->headScript()
+                ->appendFile($this->basePath('js/jquery-3.1.0.min.js'))
+                ->appendFile($this->basePath('js/custom.js'));
+    ?>
+</head>
+<body>
+	<!--HEADER-->
+	<header id="top-head" class="uk-position-fixed">
+		<div class="uk-container uk-container-expand uk-background-primary">
+			<nav class="uk-navbar uk-light" data-uk-navbar="mode:click; duration: 250" uk-navbar>
+				<div class="uk-navbar-left">
+					<div class="uk-navbar-item uk-visible@l">						
+						<a class="uk-logo" href="<?= $this->url('home') ?>">
+							<img class="custom-logo" src="<?= $this->basePath('img/logo.jpeg'); ?>" alt="">
+						</a>
+					</div>
+					<ul class="uk-navbar-nav uk-visible@m">
+						<li><a href="<?= $this->url('home') ?>">Inicio</a></li>						
+					</ul>
+					<div class="uk-navbar-item uk-visible@s">
+						<?php 
+						  if (isset($this->buscarForm) && isset($this->route)):							
+							     $searchForm = $this->buscarForm;
+							     $searchForm->get("texto")->setValue($texto);
+							     $searchForm->setAttribute('class', 'uk-search uk-search-default');
+							     $buscarForm->setAttribute('action', $this->url($this->route));
+							     $searchForm->prepare();
+							     echo $this->form()->openTag($searchForm);
+							     echo "<span data-uk-search-icon></span>";
+							     echo $this->formInput($searchForm->get('texto'));
+							     echo $this->formSubmit($searchForm->get('buscar'));
+							     echo $this->form()->closeTag();							   						
+					       endif; 
+					   ?>
+					</div>
+				</div>
+				<div class="uk-navbar-right">
+					<ul class="uk-navbar-nav">
+						<li><a href="<?= $this->url('perfil') ?>" data-uk-icon="icon:user" title="Perfil" data-uk-tooltip></a></li>						
+						<li><a href="<?= $this->url('salir') ?>" data-uk-icon="icon:  sign-out" title="Cerrar sesión" data-uk-tooltip></a></li>						
+					</ul>
+				</div>
+			</nav>
+		</div>
+	</header>
+	<!--/HEADER-->
+	<!-- LEFT BAR -->
+	<aside id="left-col" class="uk-light uk-visible@m">
+		<div class="left-logo uk-flex uk-flex-middle">
+			<img class="custom-logo" src="<?php //echo $this->basePath('img/logo.jpeg'); ?>" alt="KyL Company">
+		</div>
+		<div class="left-content-box  content-box-dark">
+			<?php $usuario = $this->usuario_helper($this->identity()['cod_usuario']); ?>
+			<img src="<?= $this->basePath() . "/img/perfil/" . $usuario->imagen_perfil; ?>" alt="" class="uk-border-circle profile-img">
+			<h4 class="uk-text-center uk-margin-remove-vertical text-light"><?= $usuario->nombres." ".$usuario->apellidos; ?></h4>
+			
+			<div class="uk-position-relative uk-text-center uk-display-block">
+			    <a href="#" class="uk-text-small uk-text-muted uk-display-block uk-text-center" data-uk-icon="icon: triangle-down; ratio: 0.7"><?= $usuario->rol; ?></a>
+			    <!-- user dropdown -->
+			    <div class="uk-dropdown user-drop" data-uk-dropdown="mode: click; pos: bottom-center; animation: uk-animation-slide-bottom-small; duration: 150">
+			    	<ul class="uk-nav uk-dropdown-nav uk-text-left">						
+						<li><a href="<?= $this->url('perfil') ?>"><span data-uk-icon="icon: image"></span> Perfil</a></li>
+						<li class="uk-nav-divider"></li>
+						<li><a href="<?= $this->url('salir') ?>"><span data-uk-icon="icon: sign-out"></span> Cerrar sesión</a></li>
+				    </ul>
+			    </div>
+			    <!-- /user dropdown -->
+			</div>
+		</div>
+		
+		<div class="left-nav-wrap">
+			<ul class="uk-nav uk-nav-default uk-nav-parent-icon" data-uk-nav>
+				<li class="uk-nav-header">ACCIONES:</li>
+				<li class="uk-parent">
+					<a href="#"><span data-uk-icon="icon: users" class="uk-margin-small-right"></span>Cliente</a>
+					<ul class="uk-nav-sub">
+						<li><a href="<?= $this->url('cliente') ?>">Administrar Clientes</a></li>
+						<li><a href="<?= $this->url('almacen', ['action' => 'index']) ?>">Administrar Almacenes</a></li>
+					</ul>
+				</li>
+				<li><a href="<?= $this->url('conductor') ?>"><span data-uk-icon="icon: location" class="uk-margin-small-right"></span>Conductor</a></li>
+				<li><a href="<?= $this->url('vehiculo') ?>"><span data-uk-icon="icon: world" class="uk-margin-small-right"></span>Vehiculo</a></li>			
+				
+				<li class="uk-parent">
+					<a href="#"><span data-uk-icon="icon: rss" class="uk-margin-small-right"></span>Traslado</a>
+					<ul class="uk-nav-sub">
+						<li><a href="<?= $this->url('cliente') ?>">Administrar Traslado</a></li>
+						<li><a href="<?= $this->url('cliente') ?>">Administrar Destinatarios</a></li>
+					</ul>
+				</li>
+				<!-- <li><a href="#"><span data-uk-icon="icon: user" class="uk-margin-small-right"></span>Usuario</a></li>
+				<li><a href="#"><span data-uk-icon="icon: cart" class="uk-margin-small-right"></span>Compra</a></li> -->				
+			</ul>
+			<div class="uk-margin-top">
+			
+				<ul class="uk-nav uk-nav-default uk-nav-parent-icon" data-uk-nav>
+    				<li class="uk-nav-header">REPORTES:</li>				
+    				<li><a href="<?= $this->url('reporte', ['action' => 'index']) ?>"><span data-uk-icon="icon: location" class="uk-margin-small-right"></span>1</a></li>
+    				<li><a href="<?= $this->url('reporte') ?>"><span data-uk-icon="icon: world" class="uk-margin-small-right"></span>2</a></li>
+    			</ul>
+				
+				<!-- <h5>REPORTES</h5>
+				 <div>
+					<span class="uk-text-small">Traffic <small>(+50)</small></span>
+					<progress class="uk-progress" value="50" max="100"></progress>
+				</div>
+				<div>
+					<span class="uk-text-small">Income <small>(+78)</small></span>
+					<progress class="uk-progress success" value="78" max="100"></progress>
+				</div>
+				<div>
+					<span class="uk-text-small">Feedback <small>(-12)</small></span>
+					<progress class="uk-progress warning" value="12" max="100"></progress>
+				</div> -->
+				
+			</div>
+			
+		</div>
+		<div class="bar-bottom">
+			<ul class="uk-subnav uk-flex uk-flex-center uk-child-width-1-5" data-uk-grid>
+				<li>
+					<a href="<?= $this->url('admin') ?>" class="uk-icon-link" data-uk-icon="icon: home" title="Inicio" data-uk-tooltip></a>
+				</li>
+				<li>
+					<a href="<?= $this->url('admin') ?>" class="uk-icon-link" data-uk-icon="icon: settings" title="Configuración" data-uk-tooltip></a>
+				</li>
+				<li>
+					<a href="<?= $this->url('perfil') ?>" class="uk-icon-link" data-uk-icon="icon: user"  title="Perfil" data-uk-tooltip></a>
+				</li>				
+				<li>
+					<a href="<?= $this->url('salir') ?>" class="uk-icon-link" data-uk-icon="icon: sign-out" title="Cerrar sesión" data-uk-tooltip></a>
+				</li>
+			</ul>
+		</div>
+	</aside>
+	<!-- /LEFT BAR -->
+	<!-- CONTENT -->
+	<div id="content" data-uk-height-viewport="expand: true">
+		<div class="uk-container uk-container-expand">
+		
+			<!--    Renderizar mensajes -->
+            <?php 
+                $flash = $this->flashMessenger();
+                $flash->setMessageOpenFormat('<div%s uk-alert>
+                                        <a class="uk-alert-close" uk-close="duration: 500"></a>
+                                        <p>')
+                                        ->setMessageSeparatorString('</p><p>')
+                                        ->setMessageCloseString('</p></div>');
+            ?>
+            <?php echo $this->flashMessenger()->render('success', ["uk-alert uk-alert-success"]); ?>
+            <?php echo $this->flashMessenger()->render('info', ["uk-alert uk-alert-primary"]); ?>
+        	<?php echo $this->flashMessenger()->render('error', ["uk-alert uk-alert-danger"]); ?>
+            <!--    Renderizar mensajes -->
+		
+			<?php echo $this->content; ?>
+			
+			<footer class="uk-section uk-section-small uk-text-center">
+				<hr>
+				<p class="uk-text-small uk-text-center">&copy; <?= date('Y') ?> por Rafael Contreras. Todos los derechos reservados. | <?= \Admin\Module::VERSION ?></p>
+			</footer>
+		</div>
+	</div>
+	<!-- /CONTENT -->	
+	
+	<!-- JS FILES -->
+	<?= $this->inlineScript()
+    	 ->appendFile($this->basePath('js/uikit.min.js'), 'text/javascript')
+    	 ->appendFile($this->basePath('js/uikit-icons.min.js'), 'text/javascript')
+    	 ->appendFile($this->basePath('js/Chart.min.js'), 'text/javascript')
+    	 //->appendFile($this->basePath('js/kick-off/chartScripts.js'), 'text/javascript'); ?>		
+</body>    
+</html>

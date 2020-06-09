@@ -1,0 +1,51 @@
+<?php
+	$form = $this->form;
+	$form->setAttributes(array('action' => $this->url('reestablecer-clave')));
+	$form->prepare();
+	
+	$helper = $this->formElementErrors();
+	$helper->setMessageOpenFormat('<div class="uk-alert uk-alert-danger">');
+	$helper->setMessageSeparatorString('</div><div class="uk-alert uk-alert-danger">');
+	$helper->setMessageCloseString('</div>');
+?>
+
+<div class="uk-text-center uk-margin">
+	<h3><i uk-icon="icon: unlock"></i>Reestablecer Clave</h3>
+</div>
+
+<?php echo $this->form()->openTag($form); ?>	   
+	
+	<div class="uk-margin">
+	   <?php echo $this->formHidden($form->get('csrf')) ?>
+	   <?php echo $helper->render($form->get('csrf'));?>
+	</div>			
+
+	<div class="uk-margin">
+	   	<?php //echo $this->formLabel($form->get('correo')) ?>
+	   	<div class="uk-form-controls">
+	   		<?php echo $this->formInput($form->get('correo')); ?>
+	   		<?php echo $helper->render($form->get('correo'));?>
+	   	</div>
+	</div>
+
+	<div class="uk-margin">
+	   	<?php //echo $this->formLabel($form->get('captcha')) ?>
+	   	<div class="uk-form-controls">
+	   		<?php echo $this->formCaptcha($form->get('captcha')); ?>
+	   		<?php echo $helper->render($form->get('captcha'));?>
+	   	</div>
+	</div>              	                 
+
+	<div class="uk-margin">                                                               
+		<?php echo $this->formInput($form->get('enviar')); ?>
+	</div>
+
+<?php echo $this->form()->closeTag($form);?>
+
+<div class="uk-text-center">
+	<a class="uk-link-reset uk-text-small" href="<?php echo $this->url('ingresar');?>">Iniciar sesión</a>
+</div>
+	
+
+
+

@@ -1,0 +1,73 @@
+
+<a href="<?php echo $this->url("vehiculo"); ?>" class="uk-button uk-button-link uk-button-small">
+	<span data-uk-icon="icon: reply"></span> Volver
+</a>
+
+<div class="uk-card uk-card-default uk-card-small uk-card-hover">
+<div class="uk-card-header">
+	<h3><?php echo $this->text;?> Vehiculo</h3>
+</div>
+<div class="uk-card-body">
+	<?php if ($this->action != "eliminar-vehiculo"): ?>	
+		<?php
+        	$form = $this->form;
+        	$form->setAttribute('action', $this->url('vehiculo', array('action' => $this->action)));
+        	$form->setAttribute('class', 'uk-form-horizontal');
+        	$form->prepare();
+        	
+        	$helper = $this->formElementErrors();
+        	$helper->setMessageOpenFormat('<div class="uk-alert uk-alert-danger">');
+        	$helper->setMessageSeparatorString('</div><div class="uk-alert uk-alert-danger">');
+        	$helper->setMessageCloseString('</div>');
+        ?>
+		
+		<?php echo $this->form()->openTag($form);?>			
+			<?php echo $this->formHidden($form->get('cod_vehiculo')); ?>
+			<?php echo $helper->render($form->get('cod_vehiculo')); ?>
+			
+			<div class="uk-margin">
+				<?php echo $this->formLabel($form->get('marca')) ?>
+				<div class="uk-form-controls">			
+    				<?php echo $this->formInput($form->get('marca')); ?>
+    				<?php echo $helper->render($form->get('marca')); ?>
+				</div>
+			</div>
+			
+			<div class="uk-margin">
+				<?php echo $this->formLabel($form->get('placa')) ?>
+				<div class="uk-form-controls">
+					<?php echo $this->formInput($form->get('placa')); ?>
+					<?php echo $helper->render($form->get('placa')); ?>
+				</div>
+			</div>
+			
+			<div class="uk-margin">
+				<?php echo $this->formLabel($form->get('soat')) ?>
+				<div class="uk-form-controls">
+					<?php echo $this->formInput($form->get('soat')); ?>
+					<?php echo $helper->render($form->get('soat')); ?>
+				</div>
+			</div>		
+			
+			<div class="uk-margin">
+				<div class="">
+					<?php echo $this->formInput($form->get('guardar')); ?>
+				</div>
+			</div>		
+		<?php echo $this->form()->closeTag($form);?>
+	<?php else: ?>
+		 <h3>¿Esta seguro que desea eliminar el vehiculo: <strong><?php echo $this->escapeHtml($this->vehiculo->placa);?></strong>?</h3>
+
+         <p class="uk-text-danger">La eliminación es definitiva e irreversible</p>
+         
+         <form action="<?php echo $this->url('vehiculo', array('action' => 'eliminar-vehiculo')); ?>" method="post">
+        
+        	 <input type="hidden" name="cod_vehiculo" value="<?php echo (int) $this->vehiculo->cod_vehiculo; ?>" />
+        	 <input type="hidden" name="placa" value="<?php echo $this->vehiculo->placa; ?>" />
+        	 <input type="submit" name="eliminar" value="si" class="uk-button uk-button-secondary"/>
+        	 <input type="submit" name="eliminar" value="no" class="uk-button uk-button-defalut"/>
+        
+         </form>
+	<?php endif; ?>
+</div>
+</div>

@@ -1,0 +1,179 @@
+<?php
+    use Admin\Model\Miscellanea;
+    $this->headTitle($this->title);
+?>
+
+<div id="app">
+<div class="uk-card uk-card-default uk-card-hover">	
+
+	<div class="uk-card-header">
+		<h2> <span data-uk-icon="icon: file-text; ratio: 2"></span> <?= $this->title ?></h2>
+	</div>
+	<div class="uk-card-body">
+    	<div class="uk-alert-primary" uk-alert>Complete los campos para continuar y agregar destinatarios.</div>
+    	
+    	<div class="uk-grid-small" uk-grid>
+    		<div class="uk-width-1-2@m">
+    			
+    			<input type="hidden" v-model="cod_traslado" value="">
+    		
+    			<div class="uk-grid-small" uk-grid>
+                    <div class="uk-width-1-4@m">
+                       	<p>Cliente: </p>
+                    </div>
+                    <div class="uk-width-expand@m">
+                    	<input class="uk-input" v-model="cod_cliente" type="hidden" />
+                        <auto-complete :data="clientes" :codigoin="cod_cliente" :value="cliente_razon_social" field1="cod_cliente" field2="razon_social" placeholder="Ingrese el cliente" @newdata="handleDataCliente($event)"></auto-complete>
+                    	<div uk-alert class="uk-alert-danger" v-if="!$v.cod_cliente.minValue">Debes seleccionar un cliente</div>
+                    </div>
+                </div>
+        		
+        		<div class="uk-grid-small" uk-grid>
+                    <div class="uk-width-1-4@m">
+                       	<p>Conductor: </p>
+                    </div>
+                    <div class="uk-width-expand@m">
+                    	<input class="uk-input" v-model="cod_conductor" type="hidden" />
+                        <auto-complete :data="conductores" :codigoin="cod_conductor" :value="conductor_nombres" field1="cod_conductor" field2="nombres" field3="apellidos" placeholder="Ingrese el conductor" @newdata="handleDataConductor($event)"></auto-complete>
+                    	<div uk-alert class="uk-alert-danger" v-if="!$v.cod_conductor.minValue">Debes seleccionar un conductor</div>
+                    </div>
+                </div>                
+        		
+        		<div class="uk-grid-small" uk-grid>
+                    <div class="uk-width-1-4@m">
+                       	<p>Vehiculo: </p>
+                    </div>
+                    <div class="uk-width-expand@m">
+                    	<input class="uk-input" v-model="cod_vehiculo" type="hidden" />
+                        <auto-complete :data="vehiculos" :codigoin="cod_vehiculo" :value="vehiculo_placa" field1="cod_vehiculo" field2="placa" placeholder="Ingrese la placa" @newdata="handleDataVehiculo($event)"></auto-complete>
+                    	<div uk-alert class="uk-alert-danger" v-if="!$v.cod_vehiculo.minValue">Debes seleccionar un vehículo</div>
+                    </div>
+                </div>  	
+        		<div class="uk-grid-small" uk-grid>
+                    <div class="uk-width-1-4@m">
+                       	<p>Fecha:</p>
+                    </div>
+                    <div class="uk-width-expand@m">
+                    	<input type="date" class="uk-select" v-model="fecha_traslado"/>
+                    	<div uk-alert class="uk-alert-danger" v-if="!$v.fecha_traslado.required">Debes seleccionar una fecha</div>
+                    </div>
+                </div>
+           		 <div class="uk-grid-small" uk-grid>
+                    <div class="uk-width-1-4@m">
+                       	<p>P. Partida:</p>
+                    </div>
+                    <div class="uk-width-expand@m">
+                    	<select class="uk-select" v-model="$v.punto_partida.$model">
+                          <option disabled value="">Seleccione un Punto de Partida</option>
+                          <option>Chorrillos</option>
+                          <option>Miraflores</option>
+                    	</select>
+                    	<div uk-alert class="uk-alert-danger" v-if="!$v.punto_partida.required">Debes seleccionar un Punto de Partida</div>
+                    </div>
+                </div>
+                <div class="uk-grid-small" uk-grid>
+                    <div class="uk-width-1-4@m">
+                       	<p>P. Llegada: <br/><em>Seleccione un cliente primero</em></p>                       	
+                    </div>
+                    <div class="uk-width-expand@m">
+                    	<input class="uk-input" v-model="punto_llegada" type="hidden" />
+                        <auto-complete v-if="cod_cliente != 0" :data="almacenes" :codigoin="cod_almacen" :value="punto_llegada" field1="cod_almacen" field2="nombre_almacen" placeholder="Ingrese el almacen" @newdata="handleDataAlmacen($event)"></auto-complete>
+                    </div>
+                </div>
+                <div class="uk-grid-small" uk-grid>
+                    <div class="uk-width-1-4@m">
+                       	<p>Total:</p>                       	
+                    </div>
+                    <div class="uk-width-expand@m">
+                    	<input type="number" class="uk-input" v-model="total"/>
+                    </div>
+                </div>
+           </div>
+           <div class="uk-width-1-2@m">
+           		<div class="uk-grid-small" uk-grid>
+                    <div class="uk-width-1-2@m">
+                       	<p>Hora de llegada:</p>
+                    </div>
+                    <div class="uk-width-expand@m">
+                    	<input type="text" class="uk-input" v-model="hora_llegada" placeholder="00:00" v-mask="['##:##']" />
+                    </div>
+                </div>
+           		 <div class="uk-grid-small" uk-grid>
+                    <div class="uk-width-1-2@m">
+                       	<p>Temperatura de llegada:</p>
+                    </div>
+                    <div class="uk-width-expand@m">
+                    	<input type="number" class="uk-input" v-model="temperatura_llegada"  />
+                    </div>
+                </div>
+                <div class="uk-grid-small" uk-grid>
+                    <div class="uk-width-1-2@m">
+                       	<p>Humedad Rel. de llegada:</p>                       	
+                    </div>
+                    <div class="uk-width-auto@m">
+                    	<input type="number" class="uk-input" v-model="humedad_relativa_llegada"/>
+                    </div>
+                </div>
+                <div class="uk-grid-small" uk-grid>
+                    <div class="uk-width-1-2@m">
+                       	<p>Hora de salida:</p>
+                    </div>
+                    <div class="uk-width-expand@m">
+                    	<input type="text" class="uk-input" v-model="hora_salida" placeholder="00:00" v-mask="['##:##']"/>
+                    </div>
+                </div>
+           		 <div class="uk-grid-small" uk-grid>
+                    <div class="uk-width-1-2@m">
+                       	<p>Temperatura de salida:</p>
+                    </div>
+                    <div class="uk-width-expand@m">
+                    	<input type="number" class="uk-input" v-model="temperatura_salida"/>
+                    </div>
+                </div>
+                <div class="uk-grid-small" uk-grid>
+                    <div class="uk-width-1-2@m">
+                       	<p>Humedad Rel. de salida:</p>                       	
+                    </div>
+                    <div class="uk-width-expand@m">
+                    	<input type="number" class="uk-input" v-model="humedad_relativa_salida"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <hr/>
+    
+    	<div v-if="submitStatus == 'SUCCESS'" id="success-message" class="uk-label-success uk-padding-small uk-margin-small">{{ successMessage }}</div>
+    	
+    	<div v-if="submitStatus == 'WARNING'" id="warning-message" class="uk-label-warning uk-padding-small uk-margin-small">{{ warningMessage }}</div>
+    
+    	<div v-if="submitStatus == 'ERROR'" id="failed-message" class="uk-label-danger uk-padding-small uk-margin-small">{{ errorMessage }}</div>   		
+    	
+    	<div class="uk-grid-small" uk-grid>
+            <div class="uk-width-1-4@m">
+               	<p><a class="uk-button uk-button-link" href="<?= $this->url('traslado', ['action' => 'ver-traslados']) ?>">Ver traslados</a></p>                       	
+            </div>
+            <div class="uk-width-expand@m">
+            	<button class="uk-button uk-button-secondary" @click="guardarTraslado" >{{ textButton }}</button>
+            	<a v-if="cod_traslado != 0" class="uk-button uk-button-primary" href="<?= $this->url('destinatario', ['action' => 'agregar-destinatarios', 'cod_traslado' => $this->cod_traslado]) ?>">Agregar Destinatarios</a>
+            </div>
+        </div>
+        <pre>
+            {{ $data || json }}
+        </pre>
+	</div>	
+</div>
+</div>
+
+<script type="text/javascript">
+	var in_cod_traslado = <?= $this->cod_traslado ?>;
+	var traslado = <?= $this->traslado ?>;
+	var url_agregar_destinatarios = "<?= $this->url('destinatario', ['action' => 'agregar-destinatarios', 'cod_traslado' => null]) ?>";
+</script>
+<script src="<?= $this->basePath('js/vue-v2.6.8.js')?>"></script>
+<script src="https://cdn.jsdelivr.net/npm/v-mask/dist/v-mask.min.js"></script>
+<script src="https://unpkg.com/vuelidate/dist/vuelidate.min.js"></script>
+<script src="https://unpkg.com/vuelidate/dist/validators.min.js"></script>
+<script src="<?= $this->basePath('js/AutoComplete.js')?>"></script>
+<script src="<?= $this->basePath('js/Traslado/nuevo-traslado.js')?>"></script>
+

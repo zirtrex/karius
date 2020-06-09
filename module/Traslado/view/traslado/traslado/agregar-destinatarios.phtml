@@ -1,0 +1,194 @@
+<?php
+    use Admin\Model\Miscellanea;
+    
+    $title = 'Agregar destinatarios';
+    $this->headTitle($title);
+?>
+
+<div id="app">
+<div class="uk-card uk-card-default uk-card-hover">
+	<div class="uk-card-header">	
+		<h2><span data-uk-icon="icon: file-text; ratio: 2"></span> <?= $title ?></h2>
+	</div>
+	<div class="uk-card-body">
+    	<div>
+           	<p><span data-uk-icon="icon: reply;"></span><a class="uk-button uk-button-link" href="<?= $this->url('traslado', ['action' => 'ver-traslados',]) ?>">Ver Traslados</a></p>                       	
+        </div>
+        
+    	<div class="uk-grid-small" uk-grid>
+    		<div class="uk-width-1-2@m">
+    			
+    			<input type="hidden" v-model="cod_traslado" value="">
+    		
+    			<div class="uk-grid-small" uk-grid>
+                    <div class="uk-width-1-4@m">
+                       	<p>Cliente: </p>
+                    </div>
+                    <div class="uk-width-expand@m">
+                    	<input class="uk-input" v-model="cod_cliente" type="text" disabled/>
+                        
+                    </div>
+                </div>
+        		
+        		<div class="uk-grid-small" uk-grid>
+                    <div class="uk-width-1-4@m">
+                       	<p>Conductor: </p>
+                    </div>
+                    <div class="uk-width-expand@m">
+                    	<input class="uk-input" v-model="cod_conductor" type="text" disabled/>                        
+                    </div>
+                </div>
+           </div>
+           <div class="uk-width-1-2@m">
+           		<div class="uk-grid-small" uk-grid>
+                    <div class="uk-width-1-4@m">
+                       	<p>Vehiculo (Placa): </p>
+                    </div>
+                    <div class="uk-width-expand@m">
+                    	<input class="uk-input" v-model="cod_vehiculo" type="text" disabled/>
+                    </div>
+                </div>  	
+        		<div class="uk-grid-small" uk-grid>
+                    <div class="uk-width-1-4@m">
+                       	<p>Fecha:</p>
+                    </div>
+                    <div class="uk-width-expand@m">
+                    	<input type="date" class="uk-select" v-model="fecha_traslado" disabled/>
+                    </div>
+                </div>	
+            </div>
+        </div>
+        
+        <hr/>
+    
+    	<table class="uk-table uk-table-hover" v-if="cod_traslado != 0">
+    		<thead>
+    			<tr>
+    				<th>#</th>
+    				<th width="90%"></th>
+    				<th width="auto">Acciones</th>
+    			</tr>
+    		</thead>
+    		<tbody>
+    			<tr v-for="(destinatario, index) in destinatarios" :key="destinatario.id">
+    				<td>{{ index + 1 }}</td>
+    				
+    				<td>
+    					<div class="uk-grid-small" uk-grid>
+        					<div class="uk-width-1-3@m">
+        						<div class="uk-grid-small" uk-grid>
+                                    <div class="uk-width-1-4@m">
+                                       	<p>Nombre: </p>
+                                    </div>
+                                    <div class="uk-width-expand@m">
+                                    	<input class="uk-input" v-model="destinatario.nombre" type="text"/>	
+                                    </div>
+                                </div>
+                                <div class="uk-grid-small" uk-grid>
+                                    <div class="uk-width-1-4@m">
+                                       	<p>Distrito: </p>
+                                    </div>
+                                    <div class="uk-width-expand@m">
+                                    	<input class="uk-input" v-model="destinatario.distrito" type="text"/>
+                                    </div>
+                                </div>
+                                <div class="uk-grid-small" uk-grid>
+                                    <div class="uk-width-1-4@m">
+                                       	<p>N° Guía: </p>
+                                    </div>
+                                    <div class="uk-width-expand@m">
+                                    	<input class="uk-input" v-model="destinatario.numero_guia" type="text"/> 
+                                    </div>
+                                </div>
+                                <div class="uk-grid-small" uk-grid>
+                                    <div class="uk-width-1-4@m">
+                                       	<p>Hora salida: </p>
+                                    </div>
+                                    <div class="uk-width-expand@m">
+                                    	<input class="uk-input" v-model="destinatario.hora_salida" type="text" placeholder="00:00" v-mask="['##:##']"/> 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="uk-width-1-3@m">
+                            	<div class="uk-grid-small" uk-grid>
+                                    <div class="uk-width-1-2@m">
+                                       	<p>Hora llegada: </p>
+                                    </div>
+                                    <div class="uk-width-expand@m">
+                                    	<input class="uk-input" v-model="destinatario.hora_llegada" type="text" placeholder="00:00" v-mask="['##:##']"/>	
+                                    </div>
+                                </div>
+                                <div class="uk-grid-small" uk-grid>
+                                    <div class="uk-width-1-2@m">
+                                       	<p>Temperatura llegada: </p>
+                                    </div>
+                                    <div class="uk-width-expand@m">
+                                    	<input class="uk-input" v-model="destinatario.temperatura_llegada" type="number"/>
+                                    </div>
+                                </div>
+                                <div class="uk-grid-small" uk-grid>
+                                    <div class="uk-width-1-2@m">
+                                       	<p>Humedad relativa llegada</p>
+                                    </div>
+                                    <div class="uk-width-expand@m">
+                                    	<input class="uk-input" v-model="destinatario.humedad_relativa_llegada" type="number"/> 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="uk-width-1-3@m">
+                            	<div class="uk-grid-small" uk-grid>
+                                    <div class="uk-width-1-2@m">
+                                       	<p>Hora entrega: </p>
+                                    </div>
+                                    <div class="uk-width-expand@m">
+                                    	<input class="uk-input" v-model="destinatario.hora_entrega" type="text" placeholder="00:00" v-mask="['##:##']"/>	
+                                    </div>
+                                </div>
+                                <div class="uk-grid-small" uk-grid>
+                                    <div class="uk-width-1-2@m">
+                                       	<p>Temperatura entrega: </p>
+                                    </div>
+                                    <div class="uk-width-expand@m">
+                                    	<input class="uk-input" v-model="destinatario.temperatura_entrega" type="number" />
+                                    </div>
+                                </div>
+                                <div class="uk-grid-small" uk-grid>
+                                    <div class="uk-width-1-2@m">
+                                       	<p>Humedad relativa entrega: </p>
+                                    </div>
+                                    <div class="uk-width-expand@m">
+                                    	<input class="uk-input" v-model="destinatario.humedad_relativa_entrega" type="number"/> 
+                                    </div>
+                                </div>
+                            </div>
+    					</div>							
+    				</td>
+                    
+                    <td>
+                    	<input v-model="destinatario.cod_traslado" type="hidden"/>
+                    	<button class="uk-button uk-button-blue"  @click="guardar(index)">Guardar</button>
+                    	<button class="uk-button uk-button-danger"  @click="eliminar(index)">Eliminar</button>
+                        <button class="uk-button uk-button-success"  v-if="destinatarios.length == index+1" @click="agregar(index)">Agregar</button>                    
+                    </td>
+    			</tr>
+    		</tbody>
+    	</table>	
+    	
+    	<pre>
+            {{ $data || json }}
+        </pre>
+	</div>
+</div>
+</div>
+<script type="text/javascript">
+	var in_cod_traslado = <?= $this->cod_traslado ?>;
+	var traslado = <?= $this->traslado ?>;
+</script>
+<script src="<?= $this->basePath('js/vue-v2.6.8.js')?>"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/v-mask/dist/v-mask.min.js"></script>
+<script src="https://unpkg.com/vuelidate/dist/vuelidate.min.js"></script>
+<script src="https://unpkg.com/vuelidate/dist/validators.min.js"></script>
+<script src="<?= $this->basePath('js/AutoComplete.js')?>"></script>
+<script src="<?= $this->basePath('js/Traslado/agregar-destinatarios.js')?>"></script>
+

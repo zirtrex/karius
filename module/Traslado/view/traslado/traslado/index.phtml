@@ -1,0 +1,45 @@
+       	
+<?php
+    $title = 'Sistema de Gestión de Traslados';
+    $this->headTitle($title);
+?>
+
+<h1 class="uk-text-center"><?= $this->escapeHtml($title) ?></h1>
+
+<div class="uk-grid uk-margin" uk-grid>
+	<div class="uk-width-1-2@l">
+    	<div class="uk-card uk-card-default uk-card-hover">    	
+        	<div class="uk-card-header uk-text-center">
+        		<h2><span data-uk-icon="icon: bookmark; ratio: 2"></span> <a href="<?= $this->url('traslado', ['action' => 'nuevo-traslado']) ?>">Registrar un traslado</a></h2>	
+        	</div>
+        	<div class="uk-card-body">
+                <div class="uk-text-center">
+                    <a href="<?= $this->url('traslado', ['action' => 'nuevo-traslado']) ?>">    
+                        <img style="text-align: center" class="uk-border-circle" src="<?= $this->basePath('img/traslados.png') ?>" width="200" class="uk-box-shadow-large" alt="">    
+                	</a>
+                </div>
+                <div class="uk-text-center">                    
+                    <p>Desde esta opción puedes registrar un nuevo traslado.</p>
+                </div>
+            </div>        
+        </div>
+    </div>
+    <div class="uk-width-1-2@l">
+        <div class="uk-card uk-card-default uk-card-hover">        
+        	<div class="uk-card-header uk-text-center">
+        		<h2><span data-uk-icon="icon: bookmark; ratio: 2"></span> <a href="<?= $this->url('traslado', ['action' => 'nuevo-traslado']) ?>">Administrar traslados</a></h2>	
+        	</div>
+        	<div class="uk-card-body"> 
+            	<div class="uk-text-center">
+                    <a href="<?= $this->url('traslado', ['action' => 'nuevo-traslado']) ?>">
+                        <img style="text-align: center" class="uk-border-circle" src="<?= $this->basePath('img/traslados_adm.png') ?>" width="200" class="uk-box-shadow-large" alt="">    
+                	</a>
+                </div>
+                <div class="uk-text-center">
+                    <p>Quieres ver los traslados realizados, ingresa a esta opción.</p>
+                </div>
+            </div>        
+        </div>
+    </div>
+</div>
+        	
