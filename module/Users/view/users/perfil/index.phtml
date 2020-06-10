@@ -19,7 +19,7 @@
 					<a href="javascript:void(0);">
 						<div class="uk-cover-container">
 							<canvas width="" height="350"></canvas>
-							<img src="<?php echo $this->basepath('img/perfil/');?><?php echo ($usuario->imagen_perfil == null) ? 'default.png' :  $usuario->imagen_perfil; ?>" class="profile-image img-rounded img-responsive" id="profileImg" uk-cover/>
+							<img src="<?php echo $this->basepath('public/img/perfil/');?><?php echo ($usuario->imagen_perfil == null) ? 'default.png' :  $usuario->imagen_perfil; ?>" class="profile-image img-rounded img-responsive" id="profileImg" uk-cover/>
 						</div>
 						<div class="uk-overlay uk-overlay-primary uk-transition-slide-bottom uk-position-bottom">
                             <strong id="uploadTrigger" style="display: block;"><span uk-icon="icon: camera"></span> Cambiar</strong>
@@ -36,7 +36,7 @@
 				<div id="mensaje"></div>				
 			</div>
 			<div class="uk-width-2-4@m uk-width-3-4@l">
-				<h3><?php echo ucfirst(strtoupper($usuario->nombres)) . ' ' . strtoupper($usuario->apellidos) . ' ' . strtoupper($usuario->segundoApellido);?></h3>
+				<h3><?php echo ucfirst(strtoupper($usuario->nombres)) . ' ' . strtoupper($usuario->apellidos);?></h3>
 				<p><?php echo strtoupper($usuario->rol);?></p>
 				<p><?php echo $usuario->correo;?></p>
 				<hr/>
@@ -46,5 +46,5 @@
 	</div>
 </div>
 
-<script src="<?= $this->basePath('js/cambiar-imagen-perfil.js')?>"></script>
+<script src="<?= $this->basePath('public/js/cambiar-imagen-perfil.js')?>"></script>
 

@@ -1,5 +1,4 @@
-var base = window.location.protocol + "//" + window.location.host + "/Rafael/Proyectos/Proyectos_Web/karius/public/";
-
+var base = window.location.protocol + "//" + window.location.host + "/public";
 
 
 $(function() {
