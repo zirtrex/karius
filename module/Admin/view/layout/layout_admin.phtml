@@ -75,7 +75,7 @@ if (defined('RUNNING_FROM_ROOT')) {
 		</div>
 		<div class="left-content-box  content-box-dark">
 			<?php $usuario = $this->usuario_helper($this->identity()['cod_usuario']); ?>
-			<img src="<?= $this->basePath("img/perfil/") ?> <?php echo ($usuario->imagen_perfil == null) ? 'default.png' :  $usuario->imagen_perfil; ?>" alt="" class="uk-border-circle profile-img">
+			<img src="<?= $this->basePath("img/perfil/") ?><?php echo ($usuario->imagen_perfil == null) ? 'default.png' :  $usuario->imagen_perfil; ?>" alt="" class="uk-border-circle profile-img">
 			<h4 class="uk-text-center uk-margin-remove-vertical text-light"><?= $usuario->nombres." ".$usuario->apellidos; ?></h4>
 			
 			<div class="uk-position-relative uk-text-center uk-display-block">
