@@ -59,6 +59,7 @@ class ClienteController extends AbstractActionController
             
             $request = $this->getRequest();
             
+            $texto = "";
             if ($request->isPost()) {
                 $data = $request->getPost();
                 $texto = $data['texto'];

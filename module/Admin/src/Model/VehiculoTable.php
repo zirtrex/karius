@@ -25,7 +25,7 @@ class VehiculoTable
     {
         if ($paginado) {
             
-            $select = new Select("vehiculo");
+            $select = new Select("ks_vehiculo");
 
             $resultSetPrototype = new ResultSet();
             $resultSetPrototype->setArrayObjectPrototype(new Vehiculo());
@@ -48,7 +48,7 @@ class VehiculoTable
             $select = new Select();
         }
         
-        $select->from('vehiculo')
+        $select->from('ks_vehiculo')
             ->columns(array('*'))
             ->order('cod_vehiculo ASC');
         

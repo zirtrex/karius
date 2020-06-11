@@ -111,10 +111,7 @@ return [
     ),
     
     'service_manager' => [
-        'factories' => [
-            \Laminas\Session\SessionManager::class => \Users\Factory\Storage\SessionManagerFactory::class,
-            \Laminas\Authentication\AuthenticationService::class => \Users\Factory\Storage\AuthenticationServiceFactory::class,
-            \Users\Storage\AuthStorage::class => \Users\Factory\Storage\AuthStorageFactory::class,
+        'factories' => [                       
             \Admin\Acl\Acl::class => function ($container) {
                 $config = include __DIR__ . '/acl.config.php';
                 return new \Admin\Acl\Acl ( $config );

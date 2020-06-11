@@ -103,7 +103,7 @@
                        	<p>Temperatura de llegada:</p>
                     </div>
                     <div class="uk-width-expand@m">
-                    	<input type="number" class="uk-input" v-model="temperatura_llegada"  />
+                    	<input type="number" step="any" class="uk-input" v-model="temperatura_llegada"  />
                     </div>
                 </div>
                 <div class="uk-grid-small" uk-grid>
@@ -111,7 +111,7 @@
                        	<p>Humedad Rel. de llegada:</p>                       	
                     </div>
                     <div class="uk-width-auto@m">
-                    	<input type="number" class="uk-input" v-model="humedad_relativa_llegada"/>
+                    	<input type="number" step="any" class="uk-input" v-model="humedad_relativa_llegada"/>
                     </div>
                 </div>
                 <div class="uk-grid-small" uk-grid>
@@ -135,7 +135,7 @@
                        	<p>Humedad Rel. de salida:</p>                       	
                     </div>
                     <div class="uk-width-expand@m">
-                    	<input type="number" class="uk-input" v-model="humedad_relativa_salida"/>
+                    	<input type="number" step="any" class="uk-input" v-model="humedad_relativa_salida"/>
                     </div>
                 </div>
             </div>
@@ -171,9 +171,9 @@
 	var url_agregar_destinatarios = "<?= $this->url('destinatario', ['action' => 'agregar-destinatarios', 'cod_traslado' => null]) ?>";
 </script>
 <script src="<?= $this->basePath('public/js/vue-v2.6.8.js')?>"></script>
-<script src="https://cdn.jsdelivr.net/npm/v-mask/dist/v-mask.min.js"></script>
-<script src="https://unpkg.com/vuelidate/dist/vuelidate.min.js"></script>
-<script src="https://unpkg.com/vuelidate/dist/validators.min.js"></script>
+<script src="<?= $this->basePath('public/js/v-mask.min.js')?>"></script>
+<script src="<?= $this->basePath('public/js/vuelidate.min.js')?>"></script>
+<!-- <script src="https://unpkg.com/vuelidate/dist/validators.min.js"></script> -->
 <script src="<?= $this->basePath('public/js/AutoComplete.js')?>"></script>
 <script src="<?= $this->basePath('public/js/Traslado/nuevo-traslado.js')?>"></script>
 

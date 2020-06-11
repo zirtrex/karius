@@ -4,14 +4,31 @@ namespace Users\Storage;
 
 use Laminas\Authentication\Storage\Session;
 use Laminas\Authentication\Storage\StorageInterface;
+use Laminas\Db\Adapter\Adapter;
+use Laminas\Db\TableGateway\TableGateway;
+use Laminas\Session\SaveHandler\DbTableGatewayOptions;
+use Laminas\Session\SaveHandler\DbTableGateway;
+use Laminas\Session\Config\SessionConfig;
 
 
-class AuthStorage implements StorageInterface
+class AuthStorage extends Session implements StorageInterface
 {	
     const NAME = 'karius_session';
     
     private $storage;
     private $resolvedIdentity;
+    
+    public function setDbHandler(Adapter $adapter)
+    {
+        $tableGateway = new TableGateway("ks_session", $adapter);
+        
+        $saveHandler = new DbTableGateway($tableGateway, new DbTableGatewayOptions());
+        
+        $sessionConfig = new SessionConfig();
+        $saveHandler->open($sessionConfig->getOption('save_path'), self::NAME);
+        
+        $this->session->getManager()->setSaveHandler($saveHandler);
+    }
 	
 	public function isEmpty()
 	{
@@ -57,6 +74,10 @@ class AuthStorage implements StorageInterface
 	     */
 	    $this->resolvedIdentity = null;
 	    $this->getStorage()->write($contents);
+	    
+	    if (is_array($contents) && !empty($contents)){
+	        $this->session->getManager()->getSaveHandler()->write($this->session->getManager()->getId(), \Zend\Json\Json::encode($contents));
+	    }
 	}
 	
     public function clear()

@@ -45,9 +45,10 @@ class AuthController extends AbstractActionController
 
     	    $recaptcha = new \ReCaptcha\ReCaptcha($secret);
 
-    	    $resp = $recaptcha->verify($gRecaptchaResponse, $_SERVER['REMOTE_ADDR']);
+    	    //$resp = $recaptcha->verify($gRecaptchaResponse, $_SERVER['REMOTE_ADDR']);
+    	    $resp = true; //Desabilito Recaptcha
 
-    	    if ($resp->isSuccess()) {
+    	    //if ($resp->isSuccess()) {
         	    if ($form->isValid()){
                 	$formData = $form->getData();
 
@@ -77,9 +78,9 @@ class AuthController extends AbstractActionController
                 } else {
                     //throw new \Exception("Datos no validados correctamente.");
                 }
-    	    } else {
+    	    /*} else {
     	        $form->get('ingresar')->setMessages(array('No ha sobrepasado nuestros filtros de seguridad, vuelva a intentarlo por favor.', 'Verifique que tenga javascript activo.'));
-    	    }
+    	    }*/
         }
 
         return new ViewModel([

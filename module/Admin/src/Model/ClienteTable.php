@@ -25,7 +25,7 @@ class ClienteTable
     {
         if ($paginado) {
             
-            $select = new Select("cliente");
+            $select = new Select("ks_cliente");
 
             $resultSetPrototype = new ResultSet();
             $resultSetPrototype->setArrayObjectPrototype(new Cliente());
@@ -48,7 +48,7 @@ class ClienteTable
             $select = new Select();
         }
         
-        $select->from('cliente')
+        $select->from('ks_cliente')
             ->columns(array('*'))
             ->order('cod_cliente ASC');
         

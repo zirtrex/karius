@@ -25,7 +25,7 @@ class ConductorTable
     {
         if ($paginado) {
             
-            $select = new Select("conductor");
+            $select = new Select("ks_conductor");
 
             $resultSetPrototype = new ResultSet();
             $resultSetPrototype->setArrayObjectPrototype(new Conductor());
@@ -48,7 +48,7 @@ class ConductorTable
             $select = new Select();
         }
         
-        $select->from('conductor')
+        $select->from('ks_conductor')
             ->columns(array('*'))
             ->order('cod_conductor ASC');
         

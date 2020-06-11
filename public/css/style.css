@@ -193,12 +193,12 @@ input:focus {
 }
 
 .search-field {
-	width: 200px;
+	width: 250px;
 	border-color: #fff !important;
 }
 
 .search-field:focus {
-	width: 300px;
+	width: 260px;
 	border-color: #fff !important;
 }
 

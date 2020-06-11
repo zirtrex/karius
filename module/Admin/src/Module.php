@@ -36,7 +36,7 @@ class Module implements ConfigProviderInterface
                     $dbAdapter = $container->get(AdapterInterface::class);
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Entity\Almacen());
-                    return new TableGateway('almacen', $dbAdapter, null, $resultSetPrototype);
+                    return new TableGateway('ks_almacen', $dbAdapter, null, $resultSetPrototype);
                 },
                 
                 Model\ClienteTable::class => function ($container) {
@@ -47,7 +47,7 @@ class Module implements ConfigProviderInterface
                     $dbAdapter = $container->get(AdapterInterface::class);
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Entity\Cliente());
-                    return new TableGateway('cliente', $dbAdapter, null, $resultSetPrototype);
+                    return new TableGateway('ks_cliente', $dbAdapter, null, $resultSetPrototype);
                 },                
                 
                 Model\ConductorTable::class => function ($container) {
@@ -58,7 +58,7 @@ class Module implements ConfigProviderInterface
                     $dbAdapter = $container->get(AdapterInterface::class);
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Entity\Conductor());
-                    return new TableGateway('conductor', $dbAdapter, null, $resultSetPrototype);
+                    return new TableGateway('ks_conductor', $dbAdapter, null, $resultSetPrototype);
                 },
                 
                 Model\DestinatarioTable::class => function ($container) {
@@ -69,7 +69,7 @@ class Module implements ConfigProviderInterface
                     $dbAdapter = $container->get(AdapterInterface::class);
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Entity\Destinatario());
-                    return new TableGateway('destinatario', $dbAdapter, null, $resultSetPrototype);
+                    return new TableGateway('ks_destinatario', $dbAdapter, null, $resultSetPrototype);
                 }, 
                 
                 Model\TrasladoTable::class => function ($container) {
@@ -80,7 +80,7 @@ class Module implements ConfigProviderInterface
                     $dbAdapter = $container->get(AdapterInterface::class);
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Entity\Traslado());
-                    return new TableGateway('traslado', $dbAdapter, null, $resultSetPrototype);
+                    return new TableGateway('ks_traslado', $dbAdapter, null, $resultSetPrototype);
                 },
                 
                 Model\UsuarioTable::class => function ($container) {
@@ -91,7 +91,7 @@ class Module implements ConfigProviderInterface
                     $dbAdapter = $container->get(AdapterInterface::class);
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Entity\Usuario());
-                    return new TableGateway('usuario', $dbAdapter, null, $resultSetPrototype);
+                    return new TableGateway('ks_usuario', $dbAdapter, null, $resultSetPrototype);
                 },                
                 
                 Model\VehiculoTable::class => function ($container) {
@@ -102,7 +102,7 @@ class Module implements ConfigProviderInterface
                     $dbAdapter = $container->get(AdapterInterface::class);
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Entity\Vehiculo());
-                    return new TableGateway('vehiculo', $dbAdapter, null);
+                    return new TableGateway('ks_vehiculo', $dbAdapter, null);
                 },
                 
                 //Smtp::class => Factory\MailFactory::class
@@ -178,9 +178,7 @@ class Module implements ConfigProviderInterface
     {       
         $this->bootstrapSession($mvcEvent);
         
-        $this->auth = $mvcEvent->getApplication()
-                                ->getServiceManager()
-                                ->get(AuthenticationService::class);
+        $this->auth = $mvcEvent->getApplication()->getServiceManager()->get(AuthenticationService::class);
         
         $mvcEvent->getApplication()->getEventManager()->attach('route', array($this, 'onRoute'), -150);
     
@@ -254,13 +252,11 @@ class Module implements ConfigProviderInterface
     
     private function bootstrapSession($e)
     {
-        $session = $e->getApplication()
-        ->getServiceManager()
-        ->get(SessionManager::class);
+        $session = $e->getApplication()->getServiceManager()->get(SessionManager::class);
         
         $session->start();
         
-        $container = new Container('session', $session);
+        $container = new Container(\Users\Storage\AuthStorage::NAME, $session);
         
         if (isset($container->init)) {
             return;
@@ -273,9 +269,7 @@ class Module implements ConfigProviderInterface
         $container->remoteAddr = $request->getServer()->get('REMOTE_ADDR');
         $container->httpUserAgent = $request->getServer()->get('HTTP_USER_AGENT');
         
-        $config = $e->getApplication()
-        ->getServiceManager()
-        ->get('config');
+        $config = $e->getApplication()->getServiceManager()->get('config');
         
         if (! isset($config['session'])) {
             return;

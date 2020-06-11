@@ -265,7 +265,7 @@ class TrasladoController extends AbstractActionController
 	            
 	            $cod_cliente =  $data['cod_cliente'];
 	            
-	            $almacenes = $this->almacenTable->obtenerTodo(false);
+	            $almacenes = $this->almacenTable->obtenerPorCodCliente();
 	            
 	            $response->setContent(\Laminas\Json\Json::encode($almacenes));
 	        }

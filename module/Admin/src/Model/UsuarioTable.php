@@ -23,7 +23,7 @@ class UsuarioTable
     {
         if ($paginado) {
             
-            $select = new Select("usuario");
+            $select = new Select("ks_usuario");
 
             $resultSetPrototype = new ResultSet();
             $resultSetPrototype->setArrayObjectPrototype(new Usuario());

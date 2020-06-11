@@ -19,22 +19,8 @@ class AlmacenTable
         $this->tableGateway = $tableGateway;
     }
 
-    public function obtenerTodo($paginado = false)
+    public function obtenerTodo()
     {
-        if ($paginado) {
-            
-            $select = new Select("almacen");
-
-            $resultSetPrototype = new ResultSet();
-            $resultSetPrototype->setArrayObjectPrototype(new Almacen());
-
-            $paginatorAdapter = new DbSelect($select, $this->tableGateway->getAdapter(), $resultSetPrototype);
-            
-            $paginator = new Paginator($paginatorAdapter);
-            
-            return $paginator;
-        }
-
         $resultSet = $this->tableGateway->select();
         return $resultSet;
     }
@@ -56,10 +42,8 @@ class AlmacenTable
     }
     
     public function obtenerPorCodCliente($cod_cliente)
-    {
-        $cod_cliente = (int) $cod_cliente;
-        
-        $resulset = $this->tableGateway->select(['cod_cliente' => $cod_cliente]);
+    {        
+        $resulset = $this->tableGateway->select(['cod_cliente' => (int)$cod_cliente]);
         
         if (! $resulset) {
             throw new RuntimeException(sprintf(

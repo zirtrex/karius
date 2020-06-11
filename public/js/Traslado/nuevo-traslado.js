@@ -1,6 +1,7 @@
 Vue.use(VueMask.VueMaskPlugin);
 Vue.use(window.vuelidate.default);
 const { required, minLength, minValue } = window.validators
+
 const app = new Vue({
     el: '#app',
     components: {

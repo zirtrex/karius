@@ -99,6 +99,9 @@ return [
         'factories' => [
             // Register the ImageManager service
             Service\ImageManager::class => InvokableFactory::class,
+            \Users\Storage\AuthStorage::class => \Users\Factory\Storage\AuthStorageFactory::class,
+            \Laminas\Session\SessionManager::class => \Users\Factory\Storage\SessionManagerFactory::class,
+            \Laminas\Authentication\AuthenticationService::class => \Users\Factory\Storage\AuthenticationServiceFactory::class, 
         ],
     ],
     

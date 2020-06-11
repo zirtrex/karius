@@ -29,7 +29,7 @@ class TrasladoTable
             
             $select = new Select();
             
-            $select->from('traslado')
+            $select->from('ks_vw_traslado')
                 ->order('cod_traslado ASC');
 
             //$resultSetPrototype = new ResultSet();
@@ -53,7 +53,7 @@ class TrasladoTable
             $select = new Select();
         }
         
-        $select->from('vw_traslado')
+        $select->from('ks_vw_traslado')
             ->columns(array('*'))
             ->order('cod_traslado ASC');
         
