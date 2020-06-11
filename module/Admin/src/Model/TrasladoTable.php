@@ -68,7 +68,7 @@ class TrasladoTable
         $sql = new Sql($this->tableGateway->getAdapter());
         $select = $sql->select();
         
-        $select->from('vw_traslado')->columns(array('*'));
+        $select->from('ks_vw_traslado')->columns(array('*'));
         
         $select->where(['cod_traslado' => $cod_traslado]);
         
