@@ -43,7 +43,7 @@ class AlmacenTable
     
     public function obtenerPorCodCliente($cod_cliente)
     {        
-        $resulset = $this->tableGateway->select(['cod_cliente' => (int)$cod_cliente]);
+        $resulset = $this->tableGateway->select(['cod_cliente' => (int) $cod_cliente]);
         
         if (! $resulset) {
             throw new RuntimeException(sprintf(
