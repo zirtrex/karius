@@ -35,7 +35,6 @@ const app = new Vue({
         successMessage : "",
         warningMessage : "",
         errorMessage : ""
-
     },
     created: function () {
 
@@ -56,7 +55,10 @@ const app = new Vue({
     	}
 
     },
-    computed: {
+    computed: {    	
+    	url_agregar_destinatarios: function () {
+    		return base + "traslado/destinatario/agregar-destinatarios/" + this.cod_traslado;
+    	}
 
     },
     updated: function() {
@@ -104,6 +106,28 @@ const app = new Vue({
     	}    	
     },
     methods: {
+    	
+    	validarHoras: function () {
+    		let isValid = true;
+    		
+    		let hora_llegada = moment(this.hora_llegada, 'HH:mm:ss');
+    		let hora_salida = moment(this.hora_salida, 'HH:mm:ss');
+    		
+    		if(!hora_llegada.isValid()){
+    			isValid = false;
+    		} else if (!hora_salida.isValid()) {
+    			isValid = false;
+    		}
+    		
+    		let minutos = moment.duration(hora_salida - hora_llegada)._milliseconds;
+    		
+    		if(minutos <= 0){
+    			isValid = false;
+    		}
+    		
+    		return isValid;
+    	},
+    
 		guardarTraslado: function () {
 			this.textButton = "Guardando...";
 			this.$v.$touch();
@@ -111,66 +135,71 @@ const app = new Vue({
 				this.warningMessage = "Revise que todos los campos estén completos antes de continuar.";
 			    this.submitStatus = 'WARNING';
 			    this.textButton = "Guardar y continuar";
-			} else {				
-				$.ajax({
-	            	url: base + "traslado/guardar-traslado-ajax",
-	            	type: "POST",
-	                context: this,
-	                data: {
-	                	cod_traslado: this.cod_traslado,
-	                	fecha_traslado: this.fecha_traslado,
-	                	punto_partida: this.punto_partida,
-	                	punto_llegada: this.punto_llegada,
-	                    hora_llegada: this.hora_llegada,
-	                    temperatura_llegada: this.temperatura_llegada,
-	                    humedad_relativa_llegada: this.humedad_relativa_llegada,
-	                    hora_salida: this.hora_salida,
-	                    temperatura_salida: this.temperatura_salida,
-	                    humedad_relativa_salida: this.humedad_relativa_salida,
-	                    total: this.total,
-	                	cod_cliente: this.cod_cliente,
-	                	cod_vehiculo: this.cod_vehiculo,
-	                	cod_conductor: this.cod_conductor
-	                },                
-	                dataType: "json",
-	                cache: false,
-	                success: function(data){
-	                	console.log(data);
-	                    if (data.response)
-	                    {
-	                    	this.textButton = "Guardado";
-	                    	this.successMessage = data.successMessage;
-	                    	this.submitStatus = 'SUCCESS';
-	                    	this.cod_traslado = data.cod_traslado;
-	                    	
-	                    	final_url = url_agregar_destinatarios + "/" + this.cod_traslado; console.log(url_agregar_destinatarios);
-	                    	
-							var finalMessage = data.successMessage + "<br/> <br/><a class='uk-button uk-button-secondary' href='" + final_url + "'>Click aquí para agregar destinatarios.</a>";
-							
-	                    	UIkit.notification({
-	    					    message: finalMessage,
-	    					    status: 'success',
-	    					    timeout: 20000
-	    					});       	
-	                    	
-							/*setTimeout (()=>{
-								window.location = url_agregar_destinatarios;
-							}, 15000);*/
-	                    }
-	                    else
-	                    {                  	
-	                    	console.log(data.response);
-	                        console.log(data.errorMessage);
-	                        this.errorMessage = data.errorMessage;
-	                        this.submitStatus = 'ERROR';
-	                        UIkit.notification({
-	    					    message: data.errorMessage,
-	    					    status: 'danger',
-	    					    timeout: 10000
-	    					});
-	                    }
-	                },
-	            });
+			} else {
+				if (this.validarHoras()) {
+					$.ajax({
+		            	url: base + "traslado/guardar-traslado-ajax",
+		            	type: "POST",
+		                context: this,
+		                data: {
+		                	cod_traslado: this.cod_traslado,
+		                	fecha_traslado: this.fecha_traslado,
+		                	punto_partida: this.punto_partida,
+		                	punto_llegada: this.punto_llegada,
+		                    hora_llegada: this.hora_llegada,
+		                    temperatura_llegada: this.temperatura_llegada,
+		                    humedad_relativa_llegada: this.humedad_relativa_llegada,
+		                    hora_salida: this.hora_salida,
+		                    temperatura_salida: this.temperatura_salida,
+		                    humedad_relativa_salida: this.humedad_relativa_salida,
+		                    total: this.total,
+		                	cod_cliente: this.cod_cliente,
+		                	cod_vehiculo: this.cod_vehiculo,
+		                	cod_conductor: this.cod_conductor
+		                },                
+		                dataType: "json",
+		                cache: false,
+		                success: function(data){
+		                	console.log(data);
+		                    if (data.response)
+		                    {
+		                    	this.textButton = "Guardado";
+		                    	this.successMessage = data.successMessage;
+		                    	this.submitStatus = 'SUCCESS';
+		                    	this.cod_traslado = data.cod_traslado;
+								
+		                    	UIkit.notification({
+		    					    message: data.successMessage,
+		    					    status: 'success',
+		    					    timeout: 20000
+		    					});       	
+		                    	
+								/*setTimeout (()=>{
+									window.location = url_agregar_destinatarios;
+								}, 15000);*/
+		                    }
+		                    else
+		                    {                  	
+		                    	console.log(data.response);
+		                        console.log(data.errorMessage);
+		                        this.errorMessage = data.errorMessage;
+		                        this.submitStatus = 'ERROR';
+		                        UIkit.notification({
+		    					    message: data.errorMessage,
+		    					    status: 'danger',
+		    					    timeout: 10000
+		    					});
+		                    }
+		                },
+		            });
+				} else {
+					this.textButton = "Guardar";
+					UIkit.notification({
+					    message: "Horas no son válidas, La hora de salida debe ser mayor a la hora de llegada",
+					    status: 'danger',
+					    timeout: 5000
+					});
+				}
 			}
             
         },

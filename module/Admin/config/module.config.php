@@ -86,6 +86,23 @@ return [
                     ],
                 ]
             ],
+            'traslado_adm' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/admin/traslado[/:action][/:cod_traslado][/page/:page][/orderby/:orderby][/:order]',
+                    'constraints' => [
+                        'action'        => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'cod_traslado'  => '[0-9]+',
+                        'page'          => '[0-9]+',
+                        'orderby'       => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'order'         => 'ASC|DESC'
+                    ],
+                    'defaults' => [
+                        'controller' => Controller\TrasladoController::class,
+                        'action'     => 'index',
+                    ],
+                ]
+            ],
             'vehiculo' => [
                 'type'    => Segment::class,
                 'options' => [

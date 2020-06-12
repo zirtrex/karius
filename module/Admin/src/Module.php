@@ -148,6 +148,19 @@ class Module implements ConfigProviderInterface
                     );
                 },
                 
+                Controller\TrasladoController::class => function ($container) {
+                    return new Controller\TrasladoController(
+                        $container,
+                        $container->get(Model\AlmacenTable::class),
+                        $container->get(Model\ClienteTable::class),
+                        $container->get(Model\ConductorTable::class),
+                        $container->get(Model\DestinatarioTable::class),
+                        $container->get(Model\TrasladoTable::class),
+                        $container->get(Model\UsuarioTable::class),
+                        $container->get(Model\VehiculoTable::class)
+                    );
+                },
+                
                 Controller\ConductorController::class => function ($container) {
                     return new Controller\ConductorController($container, $container->get(Model\ConductorTable::class));
                 },

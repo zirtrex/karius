@@ -5,12 +5,10 @@
 
 <div id="app">
 <div class="uk-card uk-card-default uk-card-hover">	
-
 	<div class="uk-card-header">
 		<h2> <span data-uk-icon="icon: file-text; ratio: 2"></span> <?= $this->title ?></h2>
 	</div>
-	<div class="uk-card-body">
-    	<div class="uk-alert-primary" uk-alert>Complete los campos para continuar y agregar destinatarios.</div>
+	<div class="uk-card-body">   	
     	
     	<div class="uk-grid-small" uk-grid>
     		<div class="uk-width-1-2@m">
@@ -73,7 +71,7 @@
                 </div>
                 <div class="uk-grid-small" uk-grid>
                     <div class="uk-width-1-4@m">
-                       	<p>P. Llegada: <br/><em>Seleccione un cliente primero</em></p>                       	
+                       	<p uk-tooltip="Seleccione un cliente primero">P. Llegada: </p>                       	
                     </div>
                     <div class="uk-width-expand@m">
                     	<input class="uk-input" v-model="punto_llegada" type="hidden" />
@@ -85,7 +83,7 @@
                        	<p>Total:</p>                       	
                     </div>
                     <div class="uk-width-expand@m">
-                    	<input type="number" class="uk-input" v-model="total"/>
+                    	<input type="number" step="any" class="uk-input" v-model="total"/>
                     </div>
                 </div>
            </div>
@@ -151,12 +149,13 @@
     	
     	<div class="uk-grid-small" uk-grid>
             <div class="uk-width-1-4@m">
-               	<p><a class="uk-button uk-button-link" href="<?= $this->url('traslado', ['action' => 'ver-traslados']) ?>">Ver traslados</a></p>                       	
+               	<p><span data-uk-icon="icon: reply;"></span><a class="uk-button uk-button-link" href="<?= $this->url('traslado', ['action' => 'ver-traslados']) ?>">Ver traslados</a></p>                       	
             </div>
             <div class="uk-width-expand@m">
             	<button class="uk-button uk-button-secondary" @click="guardarTraslado" >{{ textButton }}</button>
-            	<a v-if="cod_traslado != 0" class="uk-button uk-button-primary" href="<?= $this->url('destinatario', ['action' => 'agregar-destinatarios', 'cod_traslado' => $this->cod_traslado]) ?>">Agregar Destinatarios</a>
+            	<a v-if="cod_traslado != 0" class="uk-button uk-button-primary" v-bind:href="url_agregar_destinatarios">Agregar Destinatarios</a>
             </div>
+            <!-- <button class="uk-button uk-button-secondary" @click="validarHoras()" >{{ textButton }}</button> -->
         </div>
         <pre>
             {{ $data || json }}
@@ -168,12 +167,13 @@
 <script type="text/javascript">
 	var in_cod_traslado = <?= $this->cod_traslado ?>;
 	var traslado = <?= $this->traslado ?>;
-	var url_agregar_destinatarios = "<?= $this->url('destinatario', ['action' => 'agregar-destinatarios', 'cod_traslado' => null]) ?>";
+	var url_agregar_destinatarios = "<?= $this->url('destinatario', ['action' => 'agregar-destinatarios']) ?>";
 </script>
 <script src="<?= $this->basePath('public/js/vue-v2.6.8.js')?>"></script>
 <script src="<?= $this->basePath('public/js/v-mask.min.js')?>"></script>
 <script src="<?= $this->basePath('public/js/vuelidate.min.js')?>"></script>
 <script src="<?= $this->basePath('public/js/validators.min.js')?>"></script>
+<script src="<?= $this->basePath('public/js/moment.min.js')?>"></script>
 <script src="<?= $this->basePath('public/js/AutoComplete.js')?>"></script>
 <script src="<?= $this->basePath('public/js/Traslado/nuevo-traslado.js')?>"></script>
 

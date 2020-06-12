@@ -6,17 +6,6 @@ body.login, body.usuario {
 	background-size: cover;
 }
 
-.uk-light .uk-close{
-	color: #000;
-}
-
-.uk-alert {
-	margin-top: 10px;
-    margin-bottom: 10px;
-    padding: 5px 10px;
-    border-radius: 10px;
-}
-
 @media screen and (min-width: 640px){
 	body.login {
 		/*background-image: url('https://picsum.photos/960/700/?image=1019');*/

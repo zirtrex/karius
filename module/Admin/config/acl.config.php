@@ -67,6 +67,51 @@ return array(
                     ]
                 ],
                 
+                Admin\Controller\TrasladoController::class => array(
+                    'index' => array(
+                        'admin'
+                    ),
+                    'ver-traslados' => array(
+                        'admin'
+                    ),
+                    'ver-pedidos' => array(
+                        'admin'
+                    ),
+                    'nuevo-traslado' => array(
+                        'admin'
+                    ),
+                    'editar-traslado' => array(
+                        'admin'
+                    ),
+                    'agregar-destinatarios' => array(
+                        'admin'
+                    ),
+                    'guardar-traslado-ajax' => array(
+                        'admin'
+                    ),
+                    'obtener-clientes-ajax' => array(
+                        'admin'
+                    ),
+                    'obtener-almacenes-ajax' => array(
+                        'admin'
+                    ),
+                    'obtener-conductores-ajax' => array(
+                        'admin'
+                    ),
+                    'obtener-vehiculos-ajax' => array(
+                        'admin'
+                    ),
+                    'obtener-destinatarios-ajax' => array(
+                        'admin'
+                    ),
+                    'guardar-destinatario-ajax' => array(
+                        'admin'
+                    ),
+                    'eliminar-destinatario-ajax' => array(
+                        'admin'
+                    )
+                ),
+                
                 Admin\Controller\VehiculoController::class=> [
                     'index' => [
                         'admin'
@@ -78,6 +123,81 @@ return array(
                         'admin'
                     ],
                     'eliminar-vehiculo' => [
+                        'admin'
+                    ]
+                ],           
+  
+                Traslado\Controller\TrasladoController::class => array(
+                    'index' => [
+                        'usuario',
+                        'admin'
+                    ],
+                    'ver-traslados' => [
+                        'usuario',
+                        'admin'
+                    ],
+                    'ver-pedidos' => [
+                        'usuario',
+                        'admin'
+                    ],
+                    'nuevo-traslado' => [
+                        'usuario',
+                        'admin'
+                    ],
+                    'editar-traslado' => [
+                        'usuario',
+                        'admin'
+                    ],
+                    'agregar-destinatarios' => [
+                        'usuario',
+                        'admin'
+                    ],
+                    'guardar-traslado-ajax' => [
+                        'usuario',
+                        'admin'
+                    ],
+                    'obtener-clientes-ajax' => [
+                        'usuario',
+                        'admin'
+                    ],
+                    'obtener-almacenes-ajax' => [
+                        'usuario',
+                        'admin'
+                    ],
+                    'obtener-conductores-ajax' => [
+                        'usuario',
+                        'admin'
+                    ],
+                    'obtener-vehiculos-ajax' => [
+                        'usuario',
+                        'admin'
+                    ],
+                    'obtener-destinatarios-ajax' => [
+                        'usuario',
+                        'admin'
+                    ],
+                    'guardar-destinatario-ajax' => [
+                        'usuario',
+                        'admin'
+                    ],
+                    'eliminar-destinatario-ajax' => [
+                        'usuario',
+                        'admin'
+                    ],
+                ),
+                
+                Reporte\Controller\ReporteController::class => [
+                    
+                    'index' => [
+                        'admin'
+                    ],
+                    
+                    'primer-reporte-pdf' => [
+                        'admin'
+                    ],
+                    
+                    'segundo-reporte-pdf' => [
+                        'usuario',
                         'admin'
                     ]
                 ],
@@ -125,68 +245,7 @@ return array(
                         'usuario',
                         'admin'
                     )
-                ],             
-  
-                Traslado\Controller\TrasladoController::class => array(
-                    'index' => array(
-                        'usuario'
-                    ),
-                    'ver-traslados' => array(
-                        'usuario'
-                    ),
-                    'ver-pedidos' => array(
-                        'usuario'
-                    ),                    
-                    'nuevo-traslado' => array(
-                        'usuario'
-                    ),
-                    'editar-traslado' => array(
-                        'usuario'
-                    ),
-                    'agregar-destinatarios' => array(
-                        'usuario'
-                    ),
-                    'guardar-traslado-ajax' => array(
-                        'usuario'
-                    ),
-                    'obtener-clientes-ajax' => array(
-                        'usuario'
-                    ),
-                    'obtener-almacenes-ajax' => array(
-                        'usuario'
-                    ),
-                    'obtener-conductores-ajax' => array(
-                        'usuario'
-                    ),
-                    'obtener-vehiculos-ajax' => array(
-                        'usuario'
-                    ),
-                    'obtener-destinatarios-ajax' => array(
-                        'usuario'
-                    ),
-                    'guardar-destinatario-ajax' => array(
-                        'usuario'
-                    ),
-                    'eliminar-destinatario-ajax' => array(
-                        'usuario'
-                    )
-                ),
-                
-                Reporte\Controller\ReporteController::class => [
-                    
-                    'index' => [
-                        'admin'
-                    ],
-                    
-                    'primer-reporte-pdf' => [
-                        'admin'
-                    ],
-                    
-                    'segundo-reporte-pdf' => [
-                        'usuario',
-                        'admin'
-                    ]
-                ]
+                ], 
             
             ),
             

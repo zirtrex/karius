@@ -65,6 +65,8 @@ class TrasladoController extends AbstractActionController
         {
             $select = new Select();
             
+            $select->where(['cod_usuario' => (int) $this->getDatosUsuario()->cod_usuario]);
+            
             $order_by = $this->params()->fromRoute('orderby') ? $this->params()->fromRoute('orderby') : 'cod_traslado';
             
             $order = $this->params()->fromRoute('order') ? $this->params()->fromRoute('order') : Select::ORDER_ASCENDING;
@@ -146,7 +148,6 @@ class TrasladoController extends AbstractActionController
 	    return $this->redirect()->toRoute('ingresar');
 	}
 
-	
 	public function agregarDestinatariosAction()
 	{
 	    if($this->identity())
@@ -173,15 +174,15 @@ class TrasladoController extends AbstractActionController
 	
 	public function guardarTrasladoAjaxAction()
 	{	
-		if($this->identity())
-		{
+		if ($this->identity()) {
+		    
 		    $request = $this->getRequest();
 		    $response = $this->getResponse();
 		    
 		    if ($request->isPost())
 		    {
 		        $data = $request->getPost();
-		        $errorMessage == "";
+		        $errorMessage = "";
 		        //$response->setContent(\Laminas\Json\Json::encode($data));
 		        
 		        $traslado = new Traslado();	

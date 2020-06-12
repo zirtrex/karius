@@ -55,7 +55,7 @@ class DestinatarioTable
             'hora_llegada'              => $destinatario->hora_llegada,
             'temperatura_llegada'       => $destinatario->temperatura_llegada,
             'humedad_relativa_llegada'  => $destinatario->humedad_relativa_llegada,
-            'hora_entrega'              => $destinatario->hora_salida,
+            'hora_entrega'              => $destinatario->hora_entrega,
             'temperatura_entrega'       => $destinatario->temperatura_entrega,
             'humedad_relativa_entrega'  => $destinatario->humedad_relativa_entrega,
             'hora_salida'               => $destinatario->hora_salida,

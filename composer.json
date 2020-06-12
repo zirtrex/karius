@@ -33,7 +33,8 @@
 		"laminas/laminas-permissions-acl" : "^2.7",
 		"marceltk/unisoft-dompdf-module" : "^1.0",
 		"laminas/laminas-dependency-plugin" : "^1.0",
-		"laminas/laminas-captcha" : "~2.9"
+		"laminas/laminas-captcha" : "~2.9",
+		"fightbulc/moment": "^1.32"
 	},
 	"keywords" : [
 		"karius",

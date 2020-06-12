@@ -158,6 +158,20 @@ input:focus {
 	border-radius: 0px;
 }
 
+.uk-input, .uk-select, .uk-textarea {
+    max-width: 100%;
+    width: 100%;
+    padding: 0 6px;
+    background: #fff;
+    color: #666;
+    border: 1px solid #0D4389;
+    -webkit-transition: 0.2s ease-in-out;
+    transition: 0.2s ease-in-out;
+    transition-property: all;
+    -webkit-transition-property: color, background-color, border;
+    transition-property: color, background-color, border;
+}
+
 .auto-complete input.has-error {
 	border-color: #F44336;
 }
@@ -204,4 +218,14 @@ input:focus {
 
 .profile-img {
 	width: 100px;
+}
+
+.uk-light .uk-close{
+	color: #000;
+}
+
+.uk-alert {
+	margin-top: 6px;
+    margin-bottom: 8px;
+    padding: 5px 10px;
 }

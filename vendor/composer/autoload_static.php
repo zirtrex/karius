@@ -42,6 +42,10 @@ class ComposerStaticInitda97392deda943b9ddc7ddf3f3202556
             'Psr\\Container\\' => 14,
             'Psr\\Cache\\' => 10,
         ),
+        'M' => 
+        array (
+            'Moment\\' => 7,
+        ),
         'L' => 
         array (
             'Laminas\\ZendFrameworkBridge\\' => 28,
@@ -139,6 +143,10 @@ class ComposerStaticInitda97392deda943b9ddc7ddf3f3202556
         'Psr\\Cache\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/cache/src',
+        ),
+        'Moment\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/fightbulc/moment/src',
         ),
         'Laminas\\ZendFrameworkBridge\\' => 
         array (

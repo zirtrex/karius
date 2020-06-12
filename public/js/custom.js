@@ -1,4 +1,4 @@
-var base = window.location.protocol + "//" + window.location.host + "/public/";
+var base = window.location.protocol + "//" + window.location.host + "/"; //public/
 
 
 $(function() {

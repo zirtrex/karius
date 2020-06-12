@@ -16,6 +16,7 @@ return array(
     'Psr\\SimpleCache\\' => array($vendorDir . '/psr/simple-cache/src'),
     'Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
     'Psr\\Cache\\' => array($vendorDir . '/psr/cache/src'),
+    'Moment\\' => array($vendorDir . '/fightbulc/moment/src'),
     'Laminas\\ZendFrameworkBridge\\' => array($vendorDir . '/laminas/laminas-zendframework-bridge/src'),
     'Laminas\\View\\' => array($vendorDir . '/laminas/laminas-view/src'),
     'Laminas\\Validator\\' => array($vendorDir . '/laminas/laminas-validator/src'),
