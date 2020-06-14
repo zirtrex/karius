@@ -38,22 +38,38 @@
                     	<input class="uk-input" v-model="conductor" type="text" disabled/>                        
                     </div>
                 </div>
-           </div>
-           <div class="uk-width-1-2@m">
-           		<div class="uk-grid-small" uk-grid>
+                <div class="uk-grid-small" uk-grid>
                     <div class="uk-width-1-4@m">
                        	<p>Vehiculo (Placa): </p>
                     </div>
                     <div class="uk-width-expand@m">
                     	<input class="uk-input" v-model="vehiculo" type="text" disabled/>
                     </div>
-                </div>  	
+                </div>
+           </div>
+           <div class="uk-width-1-2@m">           		  	
         		<div class="uk-grid-small" uk-grid>
                     <div class="uk-width-1-4@m">
                        	<p>Fecha:</p>
                     </div>
                     <div class="uk-width-expand@m">
                     	<input type="date" class="uk-select" v-model="fecha_traslado" disabled/>
+                    </div>
+                </div>
+                <div class="uk-grid-small" uk-grid>
+                    <div class="uk-width-1-4@m">
+                       	<p>Hora Salida:</p>
+                    </div>
+                    <div class="uk-width-expand@m">
+                    	<input type="text" placeholder="00:00" v-mask="['##:##']" class="uk-select" v-model="hora_llegada" disabled/>
+                    </div>
+                </div>
+                <div class="uk-grid-small" uk-grid>
+                    <div class="uk-width-1-4@m">
+                       	<p>Hora Llegada:</p>
+                    </div>
+                    <div class="uk-width-expand@m">
+                    	<input type="text" placeholder="00:00" v-mask="['##:##']" class="uk-select" v-model="hora_salida" disabled/>
                     </div>
                 </div>	
             </div>
@@ -165,9 +181,9 @@
 			</div>
     	</div>	
     	
-    	<pre>
-            <!-- {{ $data || json }} -->
-        </pre>
+    	<!-- <pre>
+            {{ $data || json }}
+        </pre> -->
 	</div>
 </div>
 </div>

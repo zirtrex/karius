@@ -42,7 +42,7 @@ class DestinatarioTable
     
     public function obtenerDestinatariosPorCodTraslado($cod_traslado)
     {        
-        $resultset = $this->tableGateway->select(['cod_traslado' => $cod_traslado]);        
+        $resultset = $this->tableGateway->select(['cod_traslado' => (int) $cod_traslado]);
         return $resultset;
     }
     

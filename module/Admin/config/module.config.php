@@ -180,5 +180,28 @@ return [
                 'action' => 'ver-traslados',
             ),            
         ],
+        'admin_menu' => [
+            array(
+                'label' => 'Cliente',
+                'route' => 'cliente',
+            ),
+            array(
+                'label' => 'Conductor',
+                'route' => 'conductor',
+                'action' => 'index',
+            ),
+            array(
+                'label' => 'Vehiculo',
+                'route' => 'vehiculo',
+                'action' => 'index',
+            ),
+            array(
+                'label' => 'Traslado',
+                'route' => 'traslado_adm',
+                'action' => 'index',
+            ),
+        ],
     ],
+
+        
 ];

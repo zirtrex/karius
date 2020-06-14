@@ -75,6 +75,7 @@ class ClienteTable
     public function guardar(Cliente $cliente)
     {
         $data = [
+            'ruc'               => $cliente->ruc,
             'razon_social'      => $cliente->razon_social,
             'direccion_legal'   => $cliente->direccion_legal
             

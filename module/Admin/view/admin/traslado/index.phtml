@@ -4,12 +4,34 @@
     $this->headTitle($title);
 ?>
 <div class="uk-card uk-card-default uk-card-hover">
-	<div class="uk-card-header">
-		<h2><span data-uk-icon="icon: file-text; ratio: 2"></span> <?= $this->escapeHtml($title) ?></h2>
+	<div class="uk-card-header" >
+		<div class="uk-child-width-1-2@s" uk-grid>
+    		<div>
+    			<h2><span data-uk-icon="icon: file-text; ratio: 2"></span> <?= $this->escapeHtml($title) ?></h2>	
+    		</div>
+    		<div>
+    			<form action="" method="post">
+            		<div class="uk-flex uk-flex-center@s uk-flex-right@m">
+            			<div>
+            				<label>Fecha Inicial:</label>
+            				<input name="fechaInicial" type="date" class="uk-input uk-form-small" value="<?= date('Y-m-d');?>"/>
+            			</div>
+            			<div>
+            				<label>Fecha Final:</label>
+            				<input name="fechaFinal" type="date" class="uk-input uk-form-small" value="<?= date('Y-m-d');?>"/>
+            			</div>
+            			<div>
+            				<label>&nbsp;</label>
+            				<input type="submit" class="uk-button uk-form-small" value="Filtrar" />
+            			</div>
+            		</div>
+        		</form>
+    		</div>
+    	</div>
 	</div>
 	<div class="uk-card-body">
-    	<?php if($this->traslados->count() != 0): ?>
-    	<table class="uk-table uk-table-hover uk-table-striped">
+    	<?php if ($this->traslados->count() != 0): ?>
+    	<table class="uk-table uk-table-middle uk-table-hover uk-table-striped uk-table-responsive">
     	    <thead>
     	    <tr>
     	        <th>N°</th>
@@ -24,13 +46,9 @@
     	    </tr>
     	    </thead>
     	    <tbody>
-    	    <?php
-    	    	$i = 0;
-    	    	foreach ($this->traslados as $traslado) :
-    			$i++;
-    		?>    
+    	    <?php foreach ($this->traslados as $traslado) : ?>    
     	    <tr>
-    	        <td><?php echo $i;?></td>
+    	        <td><?php echo $this->escapeHtml($traslado->cod_traslado); ?></td>
     	        
     	        <?php //var_dump($traslado)?>
     	        
@@ -56,13 +74,13 @@
     	        <td><strong><?php echo $this->escapeHtml($traslado->Vehiculo->placa);?></strong></td>
     	                
     	        <td>
-    	        	<a  href="<?php echo $this->url('traslado', [
-    	        	    'action'    => 'nuevo-traslado',
+    	        	<a  href="<?php echo $this->url('traslado_adm', [
+    	        	    'action'    => 'ver-traslado',
                         'cod_traslado'  => $traslado->cod_traslado,
     	        	    'cod_cliente'  => $traslado->Cliente->cod_cliente,
     	        	    'cod_conductor'  => $traslado->Conductor->cod_conductor,
     	        	    'cod_vehiculo'  => $traslado->Vehiculo->cod_vehiculo	        	    
-    				]); ?>" class="uk-button uk-button-small">Ver traslado</a>
+    				]); ?>" class="uk-button uk-button-primary uk-button-small">Ver traslado</a>
     				
     				
     			</td>

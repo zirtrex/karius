@@ -1,0 +1,289 @@
+<?php
+    use Admin\Model\Miscellanea;
+    $this->headTitle($this->title);
+?>
+
+<div>
+<div class="uk-card uk-card-default uk-card-hover">	
+	<div class="uk-card-header">
+		<h2> <span data-uk-icon="icon: file-text; ratio: 2"></span> <?= $this->title ?></h2>
+	</div>
+	<div class="uk-card-body">   	
+    	
+    	<div class="uk-grid-small" uk-grid>
+    		<div class="uk-width-1-2@m">
+    			
+    			<input type="hidden" value="<?= $this->traslado->cod_traslado; ?>">
+    		
+    			<div class="uk-grid-small" uk-grid>
+                    <div class="uk-width-1-4@m">
+                       	<p>Cliente: </p>
+                    </div>
+                    <div class="uk-width-expand@m">
+                    	<input value="<?= $this->traslado->Cliente->cod_cliente; ?>" type="hidden" />
+                        <input type="text" value="<?= $this->traslado->Cliente->razon_social; ?>" class="uk-input" />                    	
+                    </div>
+                </div>
+        		
+        		<div class="uk-grid-small" uk-grid>
+                    <div class="uk-width-1-4@m">
+                       	<p>Conductor: </p>
+                    </div>
+                    <div class="uk-width-expand@m">
+                    	<input value="<?= $this->traslado->Cliente->cod_conductor; ?>" type="hidden" />
+                    	<input type="text" value="<?= ($this->traslado->Conductor->nombres . " " . $this->traslado->Conductor->apellidos); ?>" class="uk-input" />
+                    </div>
+                </div>                
+        		
+        		<div class="uk-grid-small" uk-grid>
+                    <div class="uk-width-1-4@m">
+                       	<p>Vehiculo: </p>
+                    </div>
+                    <div class="uk-width-expand@m">
+                    	<input value="<?= $this->traslado->Vehiculo->cod_vehiculo; ?>" type="hidden" />
+                        <input type="text" value="<?= $this->traslado->Vehiculo->placa; ?>" class="uk-input" />
+                    </div>
+                </div>  	
+        		<div class="uk-grid-small" uk-grid>
+                    <div class="uk-width-1-4@m">
+                       	<p>Fecha:</p>
+                    </div>
+                    <div class="uk-width-expand@m">
+                    	<input type="date" class="uk-select" value="<?= $this->traslado->fecha_traslado; ?>"/>
+                    </div>
+                </div>
+           		 <div class="uk-grid-small" uk-grid>
+                    <div class="uk-width-1-4@m">
+                       	<p>P. Partida:</p>
+                    </div>
+                    <div class="uk-width-expand@m">
+                    	<select class="uk-select" value="<?= $this->traslado->punto_partida; ?>">
+                          <option disabled value="">Seleccione un Punto de Partida</option>
+                          <option>Chorrillos</option>
+                          <option>Miraflores</option>
+                    	</select>
+                    </div>
+                </div>
+                <div class="uk-grid-small" uk-grid>
+                    <div class="uk-width-1-4@m">
+                       	<p uk-tooltip="Seleccione un cliente primero">P. Llegada: </p>                       	
+                    </div>
+                    <div class="uk-width-expand@m">
+                    	<input type=input value="<?= $this->traslado->punto_llegada; ?>" class="uk-select" />
+                    </div>
+                </div>
+                <div class="uk-grid-small" uk-grid>
+                    <div class="uk-width-1-4@m">
+                       	<p>Total:</p>                       	
+                    </div>
+                    <div class="uk-width-expand@m">
+                    	<input type="number" step="any" value="<?= $this->traslado->total; ?>"class="uk-input" />
+                    </div>
+                </div>
+           </div>
+           <div class="uk-width-1-2@m">
+           		<div class="uk-grid-small" uk-grid>
+                    <div class="uk-width-1-2@m">
+                       	<p>Hora de llegada:</p>
+                    </div>
+                    <div class="uk-width-expand@m">
+                    	<input type="text" value="<?= $this->traslado->hora_llegada; ?>" placeholder="00:00" v-mask="['##:##']" class="uk-input" />
+                    </div>
+                </div>
+           		 <div class="uk-grid-small" uk-grid>
+                    <div class="uk-width-1-2@m">
+                       	<p>Temperatura de llegada:</p>
+                    </div>
+                    <div class="uk-width-expand@m">
+                    	<input type="number" step="any" value="<?= $this->traslado->temperatura_llegada; ?>" class="uk-input" />
+                    </div>
+                </div>
+                <div class="uk-grid-small" uk-grid>
+                    <div class="uk-width-1-2@m">
+                       	<p>Humedad Rel. de llegada:</p>                       	
+                    </div>
+                    <div class="uk-width-auto@m">
+                    	<input type="number" step="any" value="<?= $this->traslado->humedad_relativa_llegada; ?>" class="uk-input" />
+                    </div>
+                </div>
+                <div class="uk-grid-small" uk-grid>
+                    <div class="uk-width-1-2@m">
+                       	<p>Hora de salida:</p>
+                    </div>
+                    <div class="uk-width-expand@m">
+                    	<input type="text" value="<?= $this->traslado->hora_salida; ?>" placeholder="00:00" v-mask="['##:##']" class="uk-input" />
+                    </div>
+                </div>
+           		 <div class="uk-grid-small" uk-grid>
+                    <div class="uk-width-1-2@m">
+                       	<p>Temperatura de salida:</p>
+                    </div>
+                    <div class="uk-width-expand@m">
+                    	<input type="number" value="<?= $this->traslado->temperatura_salida; ?>" class="uk-input" />
+                    </div>
+                </div>
+                <div class="uk-grid-small" uk-grid>
+                    <div class="uk-width-1-2@m">
+                       	<p>Humedad Rel. de salida:</p>                       	
+                    </div>
+                    <div class="uk-width-expand@m">
+                    	<input type="number" step="any" value="<?= $this->traslado->humedad_relativa_salida; ?>" class="uk-input" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <hr/>
+    	
+    	<div class="uk-grid-small" uk-grid>
+            <div class="uk-width-1-4@m">
+               	<p><span data-uk-icon="icon: reply;"></span><a class="uk-button uk-button-link" href="<?= $this->url('traslado_adm', ['action' => 'index']) ?>">Ver traslados</a></p>                       	
+            </div>
+            <div class="uk-width-expand@m">            	
+            	<a v-if="cod_traslado != 0" class="uk-button uk-button-primary" >Ver Destinatarios</a>
+            </div>
+            
+        </div>
+	</div>	
+</div>
+
+<div class="uk-card uk-card-default uk-card-hover">
+	<div class="uk-card-header" >		
+		<div>
+			<h2><span data-uk-icon="icon: file-text; ratio: 2"></span> Destinatarios</h2>	
+		</div>
+	</div>
+	<div class="uk-card-body">
+    	<?php if ($this->destinatarios->count() != 0): ?>
+    	<div class="" v-if="cod_traslado != 0">
+    		<?php 
+    		  $i = 0;
+    		  foreach ($this->destinatarios as $destinatario) : 
+    		  $i++;   
+    		?>
+			<div class="uk-child-width-1-1@s" uk-grid>
+				<div><?= $i; ?></div>				
+				<div>
+					<div class="uk-grid-small" uk-grid>
+    					<div class="uk-width-1-3@m">
+    						<div class="uk-grid-small" uk-grid>
+                                <div class="uk-width-1-4@m">
+                                   	<p>Nombre: </p>
+                                </div>
+                                <div class="uk-width-expand@m">
+                                	<input type="text" value="<?= $this->escapeHtml($destinatario->nombre); ?>" class="uk-input"/>	
+                                </div>
+                            </div>
+                            <div class="uk-grid-small" uk-grid>
+                                <div class="uk-width-1-4@m">
+                                   	<p>Distrito: </p>
+                                </div>
+                                <div class="uk-width-expand@m">
+                                	<input value="<?= $this->escapeHtml($destinatario->distrito); ?>" type="text" class="uk-input"/>                                	
+                                </div>
+                            </div>
+                            <div class="uk-grid-small" uk-grid>
+                                <div class="uk-width-1-4@m">
+                                   	<p>N° Guía: </p>
+                                </div>
+                                <div class="uk-width-expand@m">
+                                	<input value="<?= $this->escapeHtml($destinatario->numero_guia); ?>" type="text" class="uk-input"/> 
+                                </div>
+                            </div>                            
+                        </div>
+                        <div class="uk-width-1-3@m">
+                        	<div class="uk-grid-small" uk-grid>
+                                <div class="uk-width-1-2@m">
+                                   	<p>Hora llegada: </p>
+                                </div>
+                                <div class="uk-width-expand@m">
+                                	<input value="<?= $this->escapeHtml($destinatario->hora_llegada); ?>" type="text" placeholder="00:00" v-mask="['##:##']" class="uk-input" />	
+                                </div>
+                            </div>
+                            <div class="uk-grid-small" uk-grid>
+                                <div class="uk-width-1-2@m">
+                                   	<p>Temperatura llegada: </p>
+                                </div>
+                                <div class="uk-width-expand@m">
+                                	<input type="number" step="any" class="uk-input" value="<?= $this->escapeHtml($destinatario->temperatura_llegada); ?>"/>
+                                </div>
+                            </div>
+                            <div class="uk-grid-small" uk-grid>
+                                <div class="uk-width-1-2@m">
+                                   	<p>Humedad relativa llegada</p>
+                                </div>
+                                <div class="uk-width-expand@m">
+                                	<input type="number" step="any" class="uk-input" value="<?= $this->escapeHtml($destinatario->humedad_relativa_llegada); ?>"/> 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="uk-width-1-3@m">
+                        	<div class="uk-grid-small" uk-grid>
+                                <div class="uk-width-1-2@m">
+                                   	<p>Hora entrega: </p>
+                                </div>
+                                <div class="uk-width-expand@m">
+                                	<input class="uk-input" value="<?= $this->escapeHtml($destinatario->hora_entrega); ?>" type="text" placeholder="00:00" v-mask="['##:##']"/>	
+                                </div>
+                            </div>
+                            <div class="uk-grid-small" uk-grid>
+                                <div class="uk-width-1-2@m">
+                                   	<p>Temperatura entrega: </p>
+                                </div>
+                                <div class="uk-width-expand@m">
+                                	<input type="number" step="any" class="uk-input" value="<?= $this->escapeHtml($destinatario->temperatura_entrega); ?>"/>
+                                </div>
+                            </div>
+                            <div class="uk-grid-small" uk-grid>
+                                <div class="uk-width-1-2@m">
+                                   	<p>Humedad relativa entrega: </p>
+                                </div>
+                                <div class="uk-width-expand@m">
+                                	<input type="number" step="any" class="uk-input" value="<?= $this->escapeHtml($destinatario->humedad_relativa_entrega); ?>"/> 
+                                </div>
+                            </div>
+                            <div class="uk-grid-small" uk-grid>
+                                <div class="uk-width-1-2@m">
+                                   	<p>Hora salida: </p>
+                                </div>
+                                <div class="uk-width-expand@m">
+                                	<input value="<?= $this->escapeHtml($destinatario->hora_salida); ?>" type="text" placeholder="00:00" v-mask="['##:##']"  class="uk-input" /> 
+                                </div>
+                            </div>
+                        </div>
+					</div>							
+				</div>                
+                <div>
+                	<div class="uk-grid-small" uk-grid>
+                        <div class="uk-width-1-2@m">
+                        	<?php     	        
+                        	   $hora_llegada = $destinatario->hora_llegada;
+                        	   $hora_salida = $destinatario->hora_salida;
+                	           $m = new \Moment\Moment($hora_llegada);
+                	           $horasT = $m->from($hora_salida)->getHours();                	           
+                	        ?>
+                           	<p>Horas totales: <?= $horasT; ?></p>                           	
+                        </div>
+                        <div class="uk-width-1-2@m">
+                        	<?php     	        
+                        	   $hora_llegada = $destinatario->hora_llegada;
+                        	   $hora_entrega = $destinatario->hora_entrega;
+                	           $m = new \Moment\Moment($hora_llegada);
+                	           $horasE = $m->from($hora_entrega)->getHours();                	           
+                	        ?>
+                        	<p>Horas de espera: <?= $horasE; ?></p> 
+                        </div>
+                    </div>	                    
+                </div>
+                <hr/>
+			</div>
+			<?php endforeach; ?>
+    	</div>
+    	
+    	<?php else: ?>
+    		<h2>No se han encontrados destinos</h2>
+    	<?php endif;?>
+	</div>	
+</div>
+</div>
+

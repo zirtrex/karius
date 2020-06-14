@@ -12,6 +12,7 @@ use Laminas\Db\Sql\Sql;
 use Laminas\Db\Sql\Expression;
 use Laminas\Db\Sql\Predicate\PredicateSet;
 use Admin\Entity\Traslado;
+use Laminas\Db\Sql\Ddl\Column\Date;
 
 
 class TrasladoTable
@@ -84,24 +85,22 @@ class TrasladoTable
         return $row;
     }   
     
-    public function obtenerRequerimientosByCodigosAndSemestre($semestre = null, $codUsuario = null, $codEscuela = null, $codCurso = null, $codQuimico = null, $orderBy = array('semestre', 'codUsuario' => 'ASC'))
+    public function obtenerTrasladosPorFecha($fechaInicial = null, $fechaFinal = null, $orderBy = ['fecha_traslado' => 'ASC'])
     {
         $sql = new Sql($this->tableGateway->getAdapter());
         $select = $sql->select();
         
-        $select->from('vw_requerimiento')->columns(array('*'));
+        $select->from('ks_vw_traslado')->columns(array('*'));
         
-        if($semestre !== null){
-            $spec = function (Where $where) use ($semestre) {
-                $where->like('semestre', $semestre . '%');
-            };
-            $select->where($spec);
+        if($fechaInicial !== null){ 
+            $fechaInicial = new Date();
         }
-        if($codUsuario !== null){ $select->where(array('codUsuario' => $codUsuario)); }
-        if($codEscuela !== null){ $select->where(array('codEscuela' => $codEscuela)); }
-        if($codCurso !== null){ $select->where(array('codCurso' => $codCurso)); }
-        if($codQuimico !== null){ $select->where(array('codQuimico' => $codQuimico)); }
         
+        if($fechaFinal !== null){
+            $fechaFinal = new Date();
+        }
+        
+        $select->where->between('fecha_traslado', $fechaInicial, $fechaFinal);
         
         if($orderBy !== null){ $select->order($orderBy); }
         

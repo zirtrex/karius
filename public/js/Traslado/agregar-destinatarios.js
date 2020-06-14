@@ -11,6 +11,8 @@ const app = new Vue({
         cliente: traslado.Cliente.razon_social,
         conductor: traslado.Conductor.nombres + " " + traslado.Conductor.apellidos,
         vehiculo: traslado.Vehiculo.placa,
+        hora_llegada: traslado.hora_llegada,
+        hora_salida: traslado.hora_salida,
         destinatarios: [],
         distritos: [
         	{"id": 4, "nombre": "Breña"},

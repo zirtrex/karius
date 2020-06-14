@@ -28,19 +28,44 @@ if (defined('RUNNING_FROM_ROOT')) {
     ?>
 </head>
 <body>
+	<!--CANVAS-NAV-->
+	<div id="offcanvas-usage" uk-offcanvas="flip: false; mode; mode: reveal; overlay: true">
+        <div class="uk-offcanvas-bar">        
+            <button class="uk-offcanvas-close" type="button" uk-close></button>
+            <?php 
+                echo $this->navigation('Laminas\Navigation\Admin_menu')
+                      ->menu()
+                      ->setMinDepth(0)
+                      ->setMaxDepth(0)
+                      ->setUlClass('uk-nav uk-nav-primary');
+            ?>
+        </div>
+    </div>
+    <!--/CANVAS-NAV-->
 	<!--HEADER-->
 	<header id="top-head" class="uk-position-fixed">
 		<div class="uk-container uk-container-expand uk-background-primary">
 			<nav class="uk-navbar uk-light" data-uk-navbar="mode:click; duration: 250" uk-navbar>
 				<div class="uk-navbar-left">
-					<div class="uk-navbar-item uk-visible@l">						
+					<div class="uk-navbar-item">
+            			<a class="uk-navbar-toggle uk-hidden@m uk-hidden@l" href="#offcanvas-usage" uk-toggle>
+                           <span class="uk-margin-small-right">Menu</span> <span uk-navbar-toggle-icon></span> 
+                        </a>                                        
+                    </div>
+					<div class="uk-navbar-item uk-visible@m">
 						<a class="uk-logo" href="<?= $this->url('home') ?>">
 							<img class="custom-logo" src="<?= $this->basePath('img/logo.jpeg'); ?>" alt="">
 						</a>
 					</div>
-					<ul class="uk-navbar-nav uk-visible@m">
-						<li><a href="<?= $this->url('home') ?>">Inicio</a></li>						
-					</ul>
+					<div class="uk-navbar-nav uk-visible@m">
+						<?php 
+                            echo $this->navigation('Laminas\Navigation\Admin_menu')
+                                  ->menu()
+                                  ->setMinDepth(0)
+                                  ->setMaxDepth(0)
+                                  ->setUlClass('uk-navbar-nav');
+                        ?>						
+					</div>
 					<div class="uk-navbar-item uk-visible@s">
 						<?php 
 						  if (isset($this->buscarForm) && isset($this->route)):							

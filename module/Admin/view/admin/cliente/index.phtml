@@ -16,6 +16,7 @@
         <thead>
         <tr>
             <th>Código</th>
+            <th>RUC</th>
             <th>Razón Social</th>	        
             <th>Dirección Legal</th>
             <th>-</th>
@@ -26,7 +27,9 @@
         	foreach ($this->clientes as $cliente) :
     	?>    
         <tr>
-            <td><?= $this->escapeHtml($cliente->cod_cliente); ?></td>        
+            <td><?= $this->escapeHtml($cliente->cod_cliente); ?></td>
+            
+            <td><?php echo $this->escapeHtml($cliente->ruc);?></td>
             
             <td><?php echo $this->escapeHtml($cliente->razon_social);?></td>      
             

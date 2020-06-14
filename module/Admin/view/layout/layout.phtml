@@ -64,25 +64,22 @@ if (defined('RUNNING_FROM_ROOT')) {
                         ?>
                     </div>
                     <div class="uk-navbar-item uk-visible@s">
-					<?php 
-					  if (isset($this->buscarForm) && isset($this->route)):							
-						     $searchForm = $this->buscarForm;
-						     $searchForm->get("texto")->setValue($texto);
-						     $searchForm->setAttribute('class', 'uk-search uk-search-default');
-						     $buscarForm->setAttribute('action', $this->url($this->route));
-						     $searchForm->prepare();
-						     echo $this->form()->openTag($searchForm);
-						     echo "<span data-uk-search-icon></span>";
-						     echo $this->formInput($searchForm->get('texto'));
-						     echo $this->formSubmit($searchForm->get('buscar'));
-						     echo $this->form()->closeTag();							   						
-				       endif; 
-				   ?>
-				</div>
-        			<a class="uk-navbar-toggle uk-hidden@m uk-hidden@l" href="#offcanvas-usage" uk-toggle>
-                       <span class="uk-margin-small-right">Menu</span> <span uk-navbar-toggle-icon></span> 
-                    </a>                                        
-                </div>                
+    					<?php 
+    					  if (isset($this->buscarForm) && isset($this->route)):							
+    						     $searchForm = $this->buscarForm;
+    						     $searchForm->get("texto")->setValue($texto);
+    						     $searchForm->setAttribute('class', 'uk-search uk-search-default');
+    						     $buscarForm->setAttribute('action', $this->url($this->route));
+    						     $searchForm->prepare();
+    						     echo $this->form()->openTag($searchForm);
+    						     echo "<span data-uk-search-icon></span>";
+    						     echo $this->formInput($searchForm->get('texto'));
+    						     echo $this->formSubmit($searchForm->get('buscar'));
+    						     echo $this->form()->closeTag();							   						
+    				       endif; 
+    				   ?>
+				   </div>
+				</div>				                
         		<div class="uk-navbar-right">
         			<ul class="uk-navbar-nav">
         				<?php if ($this->identity()): ?>
@@ -98,7 +95,12 @@ if (defined('RUNNING_FROM_ROOT')) {
         				<?php else: ?>
         					<li><a href="<?= $this->url('ingresar') ?>" class="" data-uk-icon="icon: sign-in">Iniciar sesión</a></li>
         				<?php endif;?>        				
-        			</ul>	
+        			</ul>
+        			<div class="uk-navbar-item">
+            			<a class="uk-navbar-toggle uk-hidden@m uk-hidden@l" href="#offcanvas-usage" uk-toggle>
+                           <span class="uk-margin-small-right">Menu</span> <span uk-navbar-toggle-icon></span> 
+                        </a>                                        
+                    </div>	
         		</div>
             </nav>
     	</div>

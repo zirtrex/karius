@@ -23,6 +23,23 @@ class ClienteForm extends Form
         ]);
         
         $this->add([
+            'name' => 'ruc',
+            'type' => Element\Ruc::class,
+            'attributes' => [
+                'id' => 'ruc',
+                'placeholder' => 'Ingrese ruc',
+                'required' => 'required',
+                'class' => 'uk-input'
+            ],
+            'options' => array(
+                'label' => 'Ruc',
+                'label_attributes' => array(
+                    'class' => 'uk-form-label'
+                )
+            )
+        ]);
+        
+        $this->add([
             'name' => 'razon_social',
             'type' => 'Laminas\Form\Element\Text',
             'attributes' => [

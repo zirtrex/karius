@@ -76,12 +76,13 @@ class TrasladoController extends AbstractActionController
             
             $request = $this->getRequest();
             
-            /*if($request->isPost())
+            if($request->isPost())
             {
                 $data = $request->getPost();
-                $texto = $data['texto'];
-                $select->where->like('nombres','%'.$texto.'%');
-            }*/
+                $fechaInicial = $data['fechaInicial'];
+                $fechaFinal = $data['fechaFinal'];
+                $select->where->between('fecha_traslado', $fechaInicial, $fechaFinal);
+            }
             
             $page = $this->params()->fromRoute('page') ? (int) $this->params()->fromRoute('page') : 1;
             
@@ -108,16 +109,25 @@ class TrasladoController extends AbstractActionController
         
     }
 	
-	public function verTraslados2Action()
+	public function verTrasladoAction()
 	{
 		if($this->identity())
 		{
-			$cod_usuario = $this->getDatosUsuario()->cod_usuario;			
+			$cod_usuario = $this->getDatosUsuario()->cod_usuario;
+			$cod_traslado = (int) $this->params()->fromRoute('cod_traslado', 0);
+			
+			if($cod_traslado == 0){
+			    $this->flashMessenger()->addInfoMessage('Debe seleccionar un traslado.');
+			    return $this->redirect()->toRoute('traslado_adm', ['action' => 'index']);
+			}
             
-			$traslados = $this->trasladoTable->obtenerTodo(false);
+			$traslado = $this->trasladoTable->obtenerTraslado($cod_traslado);
+			$destinatarios = $this->destinatarioTable->obtenerDestinatariosPorCodTraslado($cod_traslado);
             
             return new ViewModel([
-                'traslados' => $traslados
+                'title' => "Ver traslado",
+                'traslado' => $traslado,
+                'destinatarios' => $destinatarios
             ]);
         }
         

@@ -71,7 +71,7 @@ return array(
                     'index' => array(
                         'admin'
                     ),
-                    'ver-traslados' => array(
+                    'ver-traslado' => array(
                         'admin'
                     ),
                     'ver-pedidos' => array(

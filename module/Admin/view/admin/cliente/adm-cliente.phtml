@@ -22,7 +22,15 @@
 		
 		<?php echo $this->form()->openTag($form);?>	
 				
-			<?php echo $this->formHidden($form->get('cod_cliente')); ?>				
+			<?php echo $this->formHidden($form->get('cod_cliente')); ?>
+			
+			<div class="uk-margin">
+				<?php echo $this->formLabel($form->get('ruc')) ?>
+				<div class="uk-form-controls">			
+    				<?php echo $this->formInput($form->get('ruc')); ?>
+    				<?php echo $helper->render($form->get('ruc'));?>
+				</div>
+			</div>				
 			
 			<div class="uk-margin">
 				<?php echo $this->formLabel($form->get('razon_social')) ?>
